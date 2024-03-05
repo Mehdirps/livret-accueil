@@ -22,7 +22,7 @@
         </div>
     </nav>
 </header>
-<main class="container">
+<main class="container mt-5 mb-5">
     @yield('content')
 </main>
 <footer class="text-center">

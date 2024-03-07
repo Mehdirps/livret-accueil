@@ -15,4 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
+})->name('home');
+
+/* Authentification */
+Route::prefix('auth')->group(function () {
+    Route::post('login', [App\Http\Controllers\AuthController::class, 'doLogin'])->name('home.login');
+    Route::post('register', [App\Http\Controllers\AuthController::class, 'doRegister'])->name('home.register');
 });

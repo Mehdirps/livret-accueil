@@ -16,10 +16,10 @@
                 @enderror
             </div>
             <div class="form-group col-md-4">
-                <label for="last_name">Nom</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" required
+                <label for="name">Nom</label>
+                <input type="text" class="form-control" id="name" name="name" required
                        placeholder="Votre nom" value="{{ $user->name}}">
-                @error('last_name')
+                @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

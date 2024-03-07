@@ -46,7 +46,7 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
         $user->civility = $request->civility;
-        $user->name = $request->last_name;
+        $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->birth_date = $request->birth_date;

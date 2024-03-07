@@ -9,6 +9,12 @@
                 <h1>Bienvenue sur le livret d'accueil</h1>
                 <p>Vous trouverez ici toutes les informations nécessaires pour bien démarrer votre expérience chez
                     nous.</p>
+                @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                @endif
+                @if(session('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+                @endif
             </div>
             <div class="col-md-6">
                 <button id="show-signup-form" class="btn btn-primary">Inscription</button>

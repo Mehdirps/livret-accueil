@@ -22,4 +22,12 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [App\Http\Controllers\AuthController::class, 'doLogin'])->name('home.login');
     Route::post('register', [App\Http\Controllers\AuthController::class, 'doRegister'])->name('home.register');
     Route::get('verify_email/{email}', [App\Http\Controllers\AuthController::class, 'verify'])->name('home.verify');
+    Route::get('logout', [App\Http\Controllers\AuthController::class, 'doLogout'])->name('dashboard.logout');
+});
+
+/* Dashboard */
+Route::prefix('dashboard')->middleware('auth.check')->group(function () {
+    Route::get('first_login', [App\Http\Controllers\DashboardController::class, 'seeFirstLogin'])->name('dashboard.first_login');
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+
 });

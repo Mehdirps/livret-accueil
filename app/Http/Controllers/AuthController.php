@@ -14,7 +14,28 @@ class AuthController extends Controller
 {
     public function doLogin(LoginRequest $request)
     {
+        $credentials = $request->validated();
 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            if (!$user->email_verified_at) {
+                /* Auth::logout();*/
+                return redirect()->route('home')->with('error', 'Veuillez vérifier votre adresse e-mail avant d\'accéder à votre espace, vérifier dans votre boite e-mail ou dans les spams.');
+            }
+
+            if ($user->first_login) {
+                return redirect()->route('dashboard.first_login');
+            } else {
+                return redirect()->route('dashboard.index');
+            }
+        } else {
+            return back()->withErrors([
+                'email' => 'E-mail invalide'
+            ])->onlyInput('email');
+        }
     }
 
     public function doRegister(RegisterRequest $request)
@@ -62,7 +83,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home')->with('success', 'Bienvenue '. $user->name .', votre compte a été créé avec succès. Veuillez vérifier votre adresse e-mail pour activer votre compte.');
+        return redirect()->route('home')->with('success', 'Bienvenue ' . $user->name . ', votre compte a été créé avec succès. Veuillez vérifier votre adresse e-mail pour activer votre compte.');
     }
 
     public function verify($email)
@@ -74,5 +95,11 @@ class AuthController extends Controller
             return redirect()->route('home')->with('success', 'Votre compte a été activé avec succès. Vous pouvez maintenant vous connecter.');
         }
         return redirect()->route('home')->with('error', 'Lien de vérification invalide.');
+    }
+
+    public function doLogout()
+    {
+        Auth::logout();
+        return redirect()->route('home');
     }
 }

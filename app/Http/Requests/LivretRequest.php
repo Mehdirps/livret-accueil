@@ -30,6 +30,7 @@ class LivretRequest extends FormRequest
             'establishment_phone' => 'required|string|regex:/^(\+\d{1,3})?\d{7,14}$/',
             'establishment_email' => 'required|email|max:255',
             'establishment_website' => 'required|url|max:255',
+            'establishment_type' => 'required|string|max:255',
         ];
     }
 }

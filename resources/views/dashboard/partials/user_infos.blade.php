@@ -1,6 +1,6 @@
 <div class="col-12">
     <h2><i class="bi bi-info-circle"></i> Vos informations</h2>
-    <form id="update-form" action="{{route('dashboard.profile')}}" method="post">
+    <form id="update-form" action="{{route('dashboard.profile')}}" method="post" class="p-5 bg-light rounded">
         @csrf
         @method('post')
         <div class="row">

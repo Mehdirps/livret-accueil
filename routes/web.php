@@ -29,5 +29,4 @@ Route::prefix('auth')->group(function () {
 Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('first_login', [App\Http\Controllers\DashboardController::class, 'seeFirstLogin'])->name('dashboard.first_login');
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
-
 });

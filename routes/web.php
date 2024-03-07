@@ -21,4 +21,5 @@ Route::get('/', function () {
 Route::prefix('auth')->group(function () {
     Route::post('login', [App\Http\Controllers\AuthController::class, 'doLogin'])->name('home.login');
     Route::post('register', [App\Http\Controllers\AuthController::class, 'doRegister'])->name('home.register');
+    Route::get('verify_email/{email}', [App\Http\Controllers\AuthController::class, 'verify'])->name('home.verify');
 });

@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="{{route('dashboard.profile')}}" class="nav-link text-white">
                         <i class="bi bi-person"></i> Mon profil
                     </a>
                 </li>

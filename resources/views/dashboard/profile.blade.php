@@ -13,6 +13,7 @@
                 @endif
             </div>
             @include('dashboard.partials.user_infos')
+            @include('dashboard.partials.livret_infos')
         </div>
     </div>
 @endsection

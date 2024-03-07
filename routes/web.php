@@ -32,4 +32,5 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('dashboard.profile');
     Route::post('profile', [App\Http\Controllers\DashboardController::class, 'updateUser'])->name('dashboard.profile.update_user');
+    Route::post('profile/update_livret', [App\Http\Controllers\DashboardController::class, 'updateLivret'])->name('dashboard.profile.update_livret');
 });

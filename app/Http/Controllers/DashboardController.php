@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LivretRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Livret;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -54,5 +56,22 @@ class DashboardController extends Controller
         $user->save();
 
         return redirect()->route('dashboard.profile')->with('success', 'Vos informations ont été mise à jour avec succès');
+    }
+
+    public function updateLivret(LivretRequest $request)
+    {
+        $livret = Livret::where('user_id', auth()->id())->first();
+
+        $livret->livret_name = $request->livret_name;
+        $livret->establishment_type = $request->establishment_type;
+        $livret->establishment_name = $request->establishment_name;
+        $livret->establishment_address = $request->establishment_address;
+        $livret->establishment_phone = $request->establishment_phone;
+        $livret->establishment_email = $request->establishment_email;
+        $livret->establishment_website = $request->establishment_website;
+
+        $livret->save();
+
+        return redirect()->route('dashboard.profile')->with('success', 'Votre livret a été mis à jour avec succès');
     }
 }

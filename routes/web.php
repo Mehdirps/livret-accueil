@@ -30,4 +30,6 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('first_login', [App\Http\Controllers\DashboardController::class, 'seeFirstLogin'])->name('dashboard.first_login');
     Route::post('first_login', [App\Http\Controllers\LivretController::class, 'store'])->name('dashboard.first_login');
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('dashboard.profile');
+    Route::post('profile', [App\Http\Controllers\DashboardController::class, 'updateUser'])->name('dashboard.profile');
 });

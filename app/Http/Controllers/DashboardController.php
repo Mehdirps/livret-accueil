@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -28,5 +29,30 @@ class DashboardController extends Controller
         }
 
         return view('dashboard.first_login');
+    }
+
+    public function profile()
+    {
+        $user = auth()->user();
+        $livret = $user->livret;
+
+        return view('dashboard.profile', [
+            'livret' => $livret,
+            'user' => $user,
+        ]);
+    }
+
+    public function updateUser(UpdateUserRequest $request)
+    {
+        $user = auth()->user();
+        $user->civility = $request->civility;
+        $user->name = $request->last_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->birth_date = $request->birth_date;
+        $user->address = $request->address;
+        $user->save();
+
+        return redirect()->route('dashboard.profile')->with('success', 'Vos informations ont été mise à jour avec succès');
     }
 }

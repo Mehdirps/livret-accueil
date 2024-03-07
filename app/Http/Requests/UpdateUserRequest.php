@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'civility' => ['required', Rule::in(['M.', 'Mme'])],
-            'last_name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user()->id)],
             'phone' => 'required|string|regex:/^(\+\d{1,3})?\d{7,14}$/',
             'birth_date' => ['required', 'date'],

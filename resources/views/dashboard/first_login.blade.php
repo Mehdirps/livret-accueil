@@ -1,7 +1,7 @@
-@extends('layouts.dashboard')
-@section('dashboard_title', 'Création du livret')
+@extends('layouts.app')
+@section('app_title', 'Création du livret')
 
-@section('dashboard_content')
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-12">

@@ -1,6 +1,6 @@
 <div class="col-12">
     <h2><i class="bi bi-info-circle"></i> Vos informations</h2>
-    <form id="update-form" action="{{route('dashboard.profile')}}" method="post" class="p-5 bg-light rounded">
+    <form id="update-form" action="{{route('dashboard.profile.update_user')}}" method="post" class="p-5 bg-light rounded">
         @csrf
         @method('post')
         <div class="row">
@@ -8,8 +8,8 @@
                 <label for="civility">Civilité</label>
                 <select class="form-control" name="civility" id="civility">
                     <option selected disabled>-- Choisir --</option>
-                    <option value="M." @if($user->civility) selected @endif>M.</option>
-                    <option value="Mme" @if($user->civility) selected @endif>Mme</option>
+                    <option value="M." @if($user->civility == 'M.') selected @endif>M.</option>
+                    <option value="Mme" @if($user->civility == 'Mme') selected @endif>Mme</option>
                 </select>
                 @error('civility')
                 <div class="alert alert-danger">{{ $message }}</div>

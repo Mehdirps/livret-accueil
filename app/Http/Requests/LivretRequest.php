@@ -27,7 +27,7 @@ class LivretRequest extends FormRequest
             'livret_name' => 'required|string|max:255',
             'establishment_name' => 'required|string|max:255',
             'establishment_address' => 'required|string|max:255',
-            'establishment_phone' => 'required|string|max:255',
+            'establishment_phone' => 'required|string|regex:/^(\+\d{1,3})?\d{7,14}$/',
             'establishment_email' => 'required|email|max:255',
             'establishment_website' => 'required|url|max:255',
         ];

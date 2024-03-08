@@ -103,6 +103,18 @@ class DashboardController extends Controller
         $livret->establishment_email = $request->establishment_email;
         $livret->establishment_website = $request->establishment_website;
 
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $filename = time() . '.' . $logo->getClientOriginalExtension();
+
+            if ($livret->logo && file_exists(public_path($livret->logo))) {
+                unlink(public_path($livret->logo));
+            }
+
+            $logo->move(public_path('assets/uploads/logos'), $filename);
+            $livret->logo = 'assets/uploads/logos/' . $filename;
+        }
+
         $livret->save();
 
         return redirect()->route('dashboard.profile')->with('success', 'Votre livret a été mis à jour avec succès');

@@ -1,6 +1,6 @@
 <div class="col-12">
     <h2><i class="bi bi-info-circle"></i> Les informations du livret</h2>
-    <form action="{{ route('dashboard.profile.update_livret') }}" method="post" class="p-5 bg-light rounded">
+    <form action="{{ route('dashboard.profile.update_livret') }}" method="post" class="p-5 bg-light rounded" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="form-group">
@@ -86,6 +86,19 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                @if($livret->logo)
+                    <p>Logo actuel</p>
+                    <figure style="border-radius: 50%; overflow: hidden;width: 100px">
+                        <img src="{{asset($livret->logo)}}" alt="logo" class="img-thumbnail"
+                             style="width: 100px;object-fit: cover">
+                    </figure>
+                @endif
+                <label for="logo">Changer mon logo</label>
+                <input type="file" class="form-control" id="logo" name="logo">
             </div>
         </div>
         <button type="submit" class="btn btn-primary mt-3">Mettre à jour mon livret d'accueil</button>

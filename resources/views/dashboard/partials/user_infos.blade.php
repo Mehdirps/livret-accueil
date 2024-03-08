@@ -60,7 +60,6 @@
             </div>
         </div>
         <div class="row">
-
             <div class="form-group">
                 @if($user->avatar)
                     <p>Avatar actuel</p>

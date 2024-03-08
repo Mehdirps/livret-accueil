@@ -56,6 +56,9 @@ class DashboardController extends Controller
         $user->address = $request->address;
 
         if ($request->hasFile('avatar')) {
+            $request->validate([
+                'avatar' => 'mimes:png,jpg,jpeg,webp',
+            ]);
             $avatar = $request->file('avatar');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
 
@@ -104,6 +107,10 @@ class DashboardController extends Controller
         $livret->establishment_website = $request->establishment_website;
 
         if ($request->hasFile('logo')) {
+            $request->validate([
+                'logo' => 'mimes:png,jpg,jpeg,webp',
+            ]);
+
             $logo = $request->file('logo');
             $filename = time() . '.' . $logo->getClientOriginalExtension();
 

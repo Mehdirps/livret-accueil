@@ -69,7 +69,12 @@
                     </figure>
                 @endif
                 <label for="avatar">Changer mon Avatar</label>
-                <input type="file" class="form-control" id="avatar" name="avatar">
+                <input type="file" class="form-control" id="avatar" name="avatar" aria-describedby="avatarHelp">
+                    <small id="avatarHelp" class="form-text text-muted">Seuls les fichiers PNG, JPG, JPEG et WEBP sont
+                    autorisés</small>
+                    @error('avatar')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
             </div>
         </div>
         <br>

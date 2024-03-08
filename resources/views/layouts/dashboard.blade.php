@@ -16,17 +16,25 @@
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
+<style>
+    @media (min-width: 800px) {
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+        }
+    }
+</style>
 <body>
 <div class="row">
     <div class="col-md-3 col-12">
-        <div class="d-flex flex-column p-3 text-white bg-dark">
+        <div class="d-flex flex-column p-3 text-white bg-dark sidebar">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <span class="fs-4">Dashboard</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">
+                    <a href="{{route('dashboard.index')}}" class="nav-link text-white {{ Route::currentRouteNamed('dashboard.index') ? 'active' : '' }}" aria-current="page">
                         <i class="bi bi-speedometer2"></i> Tableau de bord
                     </a>
                 </li>
@@ -41,7 +49,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('dashboard.profile')}}" class="nav-link text-white">
+                    <a href="{{route('dashboard.profile')}}" class="nav-link text-white {{ Route::currentRouteNamed('dashboard.profile') ? 'active' : '' }}">
                         <i class="bi bi-person"></i> Mon profil
                     </a>
                 </li>
@@ -52,21 +60,21 @@
                 </li>
             </ul>
             <hr>
-           {{-- <div class="dropdown">
-                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                   id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Moi
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li></li>
-                </ul>
-            </div>--}}
+            {{-- <div class="dropdown">
+                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                     Moi
+                 </a>
+                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                     <li><a class="dropdown-item" href="#">New project...</a></li>
+                     <li><a class="dropdown-item" href="#">Settings</a></li>
+                     <li><a class="dropdown-item" href="#">Profile</a></li>
+                     <li>
+                         <hr class="dropdown-divider">
+                     </li>
+                     <li></li>
+                 </ul>
+             </div>--}}
         </div>
     </div>
     <div class="col-md-9 col-10">

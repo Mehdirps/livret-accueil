@@ -1,6 +1,7 @@
 <div class="col-12">
     <h2><i class="bi bi-info-circle"></i> Vos informations</h2>
-    <form id="update-form" action="{{route('dashboard.profile.update_user')}}" method="post" class="p-5 bg-light rounded">
+    <form id="update-form" action="{{route('dashboard.profile.update_user')}}" method="post"
+          class="p-5 bg-light rounded" enctype="multipart/form-data">
         @csrf
         @method('post')
         <div class="row">
@@ -58,11 +59,26 @@
                 @enderror
             </div>
         </div>
+        <div class="row">
+
+            <div class="form-group">
+                @if($user->avatar)
+                    <p>Avatar actuel</p>
+                    <figure style="border-radius: 50%; overflow: hidden;width: 100px">
+                        <img src="{{asset($user->avatar)}}" alt="avatar" class="img-thumbnail"
+                             style="width: 100px;object-fit: cover">
+                    </figure>
+                @endif
+                <label for="avatar">Changer mon Avatar</label>
+                <input type="file" class="form-control" id="avatar" name="avatar">
+            </div>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Mettre à jour</button>
     </form>
     <br>
-    <form id="update-form" action="{{route('dashboard.profile.update_password')}}" method="post" class="p-5 bg-light rounded">
+    <form id="update-form" action="{{route('dashboard.profile.update_password')}}" method="post"
+          class="p-5 bg-light rounded">
         @csrf
         @method('post')
         <h3><i class="bi bi-key"></i> Changer mon mot de passe</h3>

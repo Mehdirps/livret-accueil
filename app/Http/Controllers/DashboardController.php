@@ -54,6 +54,19 @@ class DashboardController extends Controller
         $user->phone = $request->phone;
         $user->birth_date = $request->birth_date;
         $user->address = $request->address;
+
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+
+            if ($user->avatar && file_exists(public_path($user->avatar))) {
+                unlink(public_path($user->avatar));
+            }
+
+            $avatar->move(public_path('assets/uploads/avatars'), $filename);
+            $user->avatar = 'assets/uploads/avatars/' . $filename;
+        }
+
         $user->save();
 
         return redirect()->route('dashboard.profile')->with('success', 'Vos informations ont été mise à jour avec succès');

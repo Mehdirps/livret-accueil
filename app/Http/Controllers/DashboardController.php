@@ -6,6 +6,7 @@ use App\Http\Requests\LivretRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Livret;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -56,6 +57,25 @@ class DashboardController extends Controller
         $user->save();
 
         return redirect()->route('dashboard.profile')->with('success', 'Vos informations ont été mise à jour avec succès');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $user = auth()->user();
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return redirect()->route('dashboard.profile')->with('error', 'Votre ancien mot de passe est incorrect');
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('dashboard.profile')->with('success', 'Votre mot de passe a été mis à jour avec succès');
     }
 
     public function updateLivret(LivretRequest $request)

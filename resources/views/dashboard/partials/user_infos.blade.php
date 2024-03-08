@@ -61,4 +61,40 @@
         <br>
         <button type="submit" class="btn btn-primary">Mettre à jour</button>
     </form>
+    <br>
+    <form id="update-form" action="{{route('dashboard.profile.update_password')}}" method="post" class="p-5 bg-light rounded">
+        @csrf
+        @method('post')
+        <h3><i class="bi bi-key"></i> Changer mon mot de passe</h3>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="old_password">Mot de passe actuel</label>
+                <input type="password" class="form-control" id="old_password" name="old_password"
+                       placeholder="Votre mot de passe actuel" required>
+                @error('old_password')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="password">Nouveau mot de passe</label>
+                <input type="password" class="form-control" id="password" name="password"
+                       placeholder="Votre nouveau mot de passe" required>
+                @error('password')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group col-md-6">
+                <label for="password_confirmation">Confirmation nouveau mot de passe</label>
+                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                       placeholder="Confirmez votre nouveau mot de passe" required>
+                @error('confirmed_password')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Changer mon mot de passe</button>
+    </form>
 </div>

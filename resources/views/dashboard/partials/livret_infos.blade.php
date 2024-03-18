@@ -104,7 +104,7 @@
                         <label for="establishment_website" class="form-label"><i class="bi bi-globe"></i> Site
                             web de l'établissement</label>
                         <input type="text" class="form-control" id="establishment_website"
-                               name="establishment_website" required
+                               name="establishment_website"
                                value="{{old('establishment_website', $livret->establishment_website)}}">
                         @error('establishment_website')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -115,7 +115,7 @@
                     <div class="form-group mb-3">
                         <label for="instagram" class="form-label"><i class="bi bi-instagram"></i> Lien Instagram</label>
                         <input type="text" class="form-control" id="instagram"
-                               name="instagram" required
+                               name="instagram"
                                value="{{old('instagram', $livret->instagram)}}">
                         @error('instagram')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -128,7 +128,7 @@
                     <div class="form-group mb-3">
                         <label for="facebook" class="form-label"><i class="bi bi-facebook"></i> Lien Facebook</label>
                         <input type="text" class="form-control" id="facebook"
-                               name="facebook" required
+                               name="facebook"
                                value="{{old('facebook', $livret->facebook)}}">
                         @error('facebook')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -139,7 +139,7 @@
                     <div class="form-group mb-3">
                         <label for="linkedin" class="form-label"><i class="bi bi-linkedin"></i> Lien Linkedin</label>
                         <input type="text" class="form-control" id="linkedin"
-                               name="linkedin" required
+                               name="linkedin"
                                value="{{old('linkedin', $livret->linkedin)}}">
                         @error('linkedin')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -152,7 +152,7 @@
                     <div class="form-group mb-3">
                         <label for="twitter" class="form-label"><i class="bi bi-twitter"></i> Lien Twitter/X</label>
                         <input type="text" class="form-control" id="twitter"
-                               name="twitter" required
+                               name="twitter"
                                value="{{old('twitter', $livret->twitter)}}">
                         @error('twitter')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -163,7 +163,7 @@
                     <div class="form-group mb-3">
                         <label for="tripadvisor" class="form-label"><i class="bi bi-globe"></i> Lien Tripadvisor</label>
                         <input type="text" class="form-control" id="tripadvisor"
-                               name="tripadvisor" required
+                               name="tripadvisor"
                                value="{{old('tripadvisor', $livret->tripadvisor)}}">
                         @error('tripadvisor')
                         <div class="alert alert-danger">{{ $message }}</div>

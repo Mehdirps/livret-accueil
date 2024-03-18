@@ -29,14 +29,14 @@ class LivretRequest extends FormRequest
             'establishment_address' => 'required|string|max:255',
             'establishment_phone' => 'required|string|regex:/^(\+\d{1,3})?\d{7,14}$/',
             'establishment_email' => 'required|email|max:255',
-            'establishment_website' => 'required|url|max:255',
             'establishment_type' => 'required|string|max:255',
-            'description' => 'string|max:255',
-            'instragram' => 'string|max:255',
-            'facebook' => 'string|max:255',
-            'twitter' => 'string|max:255',
-            'linkedin' => 'string|max:255',
-            'tripadvisor' => 'string|max:255',
+            'establishment_website' => 'nullable|url|max:255',
+            'description' => 'nullable|string|max:255',
+            'instragram' => 'nullable|string|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'linkedin' => 'nullable|string|max:255',
+            'tripadvisor' => 'nullable|string|max:255',
         ];
     }
 }

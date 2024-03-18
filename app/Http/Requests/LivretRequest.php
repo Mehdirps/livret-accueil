@@ -31,6 +31,7 @@ class LivretRequest extends FormRequest
             'establishment_email' => 'required|email|max:255',
             'establishment_website' => 'required|url|max:255',
             'establishment_type' => 'required|string|max:255',
+            'description' => 'string|max:255',
         ];
     }
 }

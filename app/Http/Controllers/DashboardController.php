@@ -100,6 +100,7 @@ class DashboardController extends Controller
 
         $livret->livret_name = $request->livret_name;
         $livret->slug = \Str::slug($request->livret_name);
+        $livret->description = $request->description;
         $livret->establishment_type = $request->establishment_type;
         $livret->establishment_name = $request->establishment_name;
         $livret->establishment_address = $request->establishment_address;

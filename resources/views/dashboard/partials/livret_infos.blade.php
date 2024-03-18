@@ -13,6 +13,14 @@
             @enderror
         </div>
         <div class="form-group">
+            <label for="description" class="form-label"><i class="bi bi-clipboard"></i> Description du
+                livret</label>
+            <textarea class="form-control" id="description" name="description" required
+                      rows="3">{{old('description', $livret->description)}}</textarea>
+            @error('description')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        <div class="form-group">
             <label for="establishment_type">Type d'établissement</label>
             <select class="form-control" id="establishment_type" name="establishment_type" required>
                 <option disabled>-- Choisissez un type d'établissement --</option>

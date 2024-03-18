@@ -25,37 +25,37 @@ class Livret extends Model
 
     public function wifi()
     {
-        return $this->hasOne(ModuleWifi::class);
+        return $this->hasOne(ModuleWifi::class, 'livret');
     }
 
     public function digicode()
     {
-        return $this->hasOne(ModuleDigicode::class);
+        return $this->hasOne(ModuleDigicode::class, 'livret');
     }
 
     public function endInfos()
     {
-        return $this->hasOne(ModuleEndInfos::class);
+        return $this->hasOne(ModuleEndInfos::class, 'livret');
     }
 
     public function homeInfos()
     {
-        return $this->hasOne(ModuleHome::class);
+        return $this->hasOne(ModuleHome::class, 'livret');
     }
 
     public function utilsPhone()
     {
-        return $this->hasMany(ModuleUtilsPhone::class);
+        return $this->hasMany(ModuleUtilsPhone::class, 'livret');
     }
 
     public function startInfos()
     {
-        return $this->hasMany(ModuleStartInfos::class);
+        return $this->hasMany(ModuleStartInfos::class, 'livret');
     }
 
     public function utilsInfos()
     {
-        return $this->hasMany(ModuleUtilsInfos::class);
+        return $this->hasMany(ModuleUtilsInfos::class, 'livret');
     }
 
 }

@@ -157,4 +157,13 @@ class DashboardController extends Controller
 
         return redirect()->route('dashboard.background')->with('success', 'Votre arrière-plan a été mis à jour avec succès');
     }
+
+    public function editLivret()
+    {
+        $livret = auth()->user()->livret;
+
+        return view('dashboard.edit_livret', [
+            'livret' => $livret,
+        ]);
+    }
 }

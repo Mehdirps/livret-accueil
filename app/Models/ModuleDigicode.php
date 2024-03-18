@@ -9,4 +9,10 @@ class ModuleDigicode extends Model
 {
     use HasFactory;
 
+    protected $table = 'module_digicode';
+
+    protected $fillable = [
+        'name',
+        'code'
+    ];
 }

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ModuleWifi extends Model
 {
     use HasFactory;
+
+    protected $table = 'module_wifi';
+
+    protected $fillable = [
+        'wifi_name',
+        'wifi_password',
+    ];
 }

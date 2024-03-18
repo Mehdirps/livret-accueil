@@ -32,6 +32,11 @@ class LivretRequest extends FormRequest
             'establishment_website' => 'required|url|max:255',
             'establishment_type' => 'required|string|max:255',
             'description' => 'string|max:255',
+            'instragram' => 'string|max:255',
+            'facebook' => 'string|max:255',
+            'twitter' => 'string|max:255',
+            'linkedin' => 'string|max:255',
+            'tripadvisor' => 'string|max:255',
         ];
     }
 }

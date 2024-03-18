@@ -109,6 +109,11 @@ class DashboardController extends Controller
         $livret->establishment_phone = $request->establishment_phone;
         $livret->establishment_email = $request->establishment_email;
         $livret->establishment_website = $request->establishment_website;
+        $livret->facebook = $request->facebook;
+        $livret->twitter = $request->twitter;
+        $livret->instagram = $request->instagram;
+        $livret->linkedin = $request->linkedin;
+        $livret->tripadvisor = $request->tripadvisor;
 
         if ($request->hasFile('logo')) {
             $request->validate([

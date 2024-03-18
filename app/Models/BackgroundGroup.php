@@ -13,6 +13,6 @@ class BackgroundGroup extends Model
 
     public function backgrounds()
     {
-        return $this->hasMany(Background::class);
+        return $this->hasMany(Background::class, 'backgrounds_group_id');
     }
 }

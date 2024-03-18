@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LivretRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Background;
+use App\Models\BackgroundGroup;
 use App\Models\Livret;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -127,5 +129,27 @@ class DashboardController extends Controller
         $livret->save();
 
         return redirect()->route('dashboard.profile')->with('success', 'Votre livret a été mis à jour avec succès');
+    }
+
+    public function background()
+    {
+        $livret = auth()->user()->livret;
+        $background_group = BackgroundGroup::all();
+
+        return view('dashboard.background', [
+            'livret' => $livret,
+            'background_group' => $background_group,
+        ]);
+    }
+
+    public function updateBackground($id)
+    {
+        $background = Background::find($id);
+
+        $livret = auth()->user()->livret;
+        $livret->background = $background->path;
+        $livret->save();
+
+        return redirect()->route('dashboard.background')->with('success', 'Votre arrière-plan a été mis à jour avec succès');
     }
 }

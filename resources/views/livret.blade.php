@@ -15,7 +15,7 @@
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
-<main>
+<main style="min-height:100vh;background-image: url({{asset($livret->background)}});background-repeat: no-repeat;background-size: cover">
     <div class="container py-5 text-center">
         <div class="row justify-content-center">
             <div class="col-lg-6">

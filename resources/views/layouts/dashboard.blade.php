@@ -43,9 +43,10 @@
                         <i class="bi bi-book"></i> Mon livret d'accueil
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{route('livret.show',[\Illuminate\Support\Facades\Auth::user()->livret->slug,\Illuminate\Support\Facades\Auth::user()->livret->id])}}">Voir</a></li>
-                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Editer</a></li>
+                        <li><a class="dropdown-item" href="{{route('dashboard.background')}}">Changer le fond</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{route('livret.show',[\Illuminate\Support\Facades\Auth::user()->livret->slug,\Illuminate\Support\Facades\Auth::user()->livret->id])}}">Voir</a></li>
                     </ul>
                 </li>
                 <li>

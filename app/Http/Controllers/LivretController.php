@@ -30,4 +30,14 @@ class LivretController extends Controller
 
         return redirect()->route('dashboard.index')->with('success', 'Votre livret "'. $livret->livret_name .'" créé avec succès !');
     }
+
+    public function show($slug, $id)
+    {
+        $livret = Livret::where('id', $id)->where('slug', $slug)->first();
+        if ($livret) {
+            return view('livret', compact('livret'));
+        } else {
+            return redirect()->route('dashboard.index')->with('error', 'Ce livret n\'existe pas.');
+        }
+    }
 }

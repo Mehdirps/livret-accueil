@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+Route::get('/livret/{slug}/{id}', [App\Http\Controllers\LivretController::class, 'show'])->name('livret.show');
+
 /* Authentification */
 Route::prefix('auth')->group(function () {
     Route::post('login', [App\Http\Controllers\AuthController::class, 'doLogin'])->name('home.login');

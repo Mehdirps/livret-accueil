@@ -38,10 +38,15 @@
                         <i class="bi bi-speedometer2"></i> Tableau de bord
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="nav-link text-white">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-book"></i> Mon livret d'accueil
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{route('livret.show',[\Illuminate\Support\Facades\Auth::user()->livret->slug,\Illuminate\Support\Facades\Auth::user()->livret->id])}}">Voir</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Editer</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#" class="nav-link text-white">

@@ -22,4 +22,40 @@ class Livret extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function wifi()
+    {
+        return $this->hasOne(ModuleWifi::class);
+    }
+
+    public function digicode()
+    {
+        return $this->hasOne(ModuleDigicode::class);
+    }
+
+    public function endInfos()
+    {
+        return $this->hasOne(ModuleEndInfos::class);
+    }
+
+    public function homeInfos()
+    {
+        return $this->hasOne(ModuleHome::class);
+    }
+
+    public function utilsPhone()
+    {
+        return $this->hasMany(ModuleUtilsPhone::class);
+    }
+
+    public function startInfos()
+    {
+        return $this->hasMany(ModuleStartInfos::class);
+    }
+
+    public function utilsInfos()
+    {
+        return $this->hasMany(ModuleUtilsInfos::class);
+    }
+
 }

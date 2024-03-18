@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('livrets', function (Blueprint $table) {
-            $table->string('background')->nullable();
+        Schema::create('module_digicode', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('code');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('livrets', function (Blueprint $table) {
-            $table->dropColumn('background');
-        });
+        Schema::dropIfExists('module_digicode');
     }
 };

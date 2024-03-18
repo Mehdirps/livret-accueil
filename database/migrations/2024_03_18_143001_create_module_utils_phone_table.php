@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('livrets', function (Blueprint $table) {
-            $table->string('establishment_type');
+        Schema::create('module_utils_phone', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('number');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('livrets', function (Blueprint $table) {
-            $table->dropColumn('establishment_type');
-        });
+        Schema::dropIfExists('module_utils_phone');
     }
 };

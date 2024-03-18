@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('livrets', function (Blueprint $table) {
-            $table->string('slug')->unique()->after('livret_name');
+        Schema::create('module_end_infos', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->text('text');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('livrets', function (Blueprint $table) {
-            $table->dropColumn('slug');
-        });
+        Schema::dropIfExists('module_end_infos');
     }
 };

@@ -88,7 +88,9 @@
         <div class="col-md-3">
             <div class="card text-center">
                 <i class="bi bi-arrow-down-left"></i>
-                <h2>Info départ</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#endInfosModal">
+                    Info départ
+                </button>
             </div>
         </div>
         <div class="col-md-3">
@@ -103,4 +105,5 @@
     @include('dashboard.partials.module_utils_phone')
     @include('dashboard.partials.module_utils_infos')
     @include('dashboard.partials.module_start_infos')
+    @include('dashboard.partials.module_end_infos')
 @endsection

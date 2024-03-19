@@ -8,6 +8,7 @@ use App\Models\Background;
 use App\Models\BackgroundGroup;
 use App\Models\Livret;
 use App\Models\ModuleDigicode;
+use App\Models\ModuleEndInfos;
 use App\Models\ModuleStartInfos;
 use App\Models\ModuleUtilsInfos;
 use App\Models\ModuleUtilsPhone;
@@ -246,7 +247,7 @@ class DashboardController extends Controller
         $utilsInfos->livret = $livret->id;
         $utilsInfos->save();
 
-        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information a été mis à jour avec succès');
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information pratique a été mis à jour avec succès');
     }
 
     public function deleteModuleUtilsInfos($id)
@@ -254,7 +255,7 @@ class DashboardController extends Controller
         $utilsInfos = ModuleUtilsInfos::find($id);
         $utilsInfos->delete();
 
-        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information a été supprimé avec succès');
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information pratique a été supprimé avec succès');
     }
 
     public function addModuleStartInfo(Request $request)
@@ -267,7 +268,7 @@ class DashboardController extends Controller
         $startInfo->livret = $livret->id;
         $startInfo->save();
 
-        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information a été mis à jour avec succès');
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information d\'arrivée a été mis à jour avec succès');
     }
 
     public function deleteModuleStartInfo($id)
@@ -275,6 +276,29 @@ class DashboardController extends Controller
         $startInfo = ModuleStartInfos::find($id);
         $startInfo->delete();
 
-        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information a été supprimé avec succès');
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information d\'arrivée a été supprimé avec succès');
     }
+
+    public function addModuleEndInfo(Request $request)
+    {
+        $livret = auth()->user()->livret;
+
+        $startInfo = new ModuleEndInfos();
+        $startInfo->name = $request->name;
+        $startInfo->text = $request->text;
+        $startInfo->livret = $livret->id;
+        $startInfo->save();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information de départ a été mis à jour avec succès');
+    }
+
+    public function deleteModuleEndInfo($id)
+    {
+        $startInfo = ModuleEndInfos::find($id);
+        $startInfo->delete();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre de départ information a été supprimé avec succès');
+    }
+
+
 }

@@ -68,4 +68,8 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     /* Start info */
     Route::post('module/start_info', [App\Http\Controllers\DashboardController::class, 'addModuleStartInfo'])->name('dashboard.module.start_info');
     Route::get('module/start_info/{id}', [App\Http\Controllers\DashboardController::class, 'deleteModuleStartInfo'])->name('dashboard.module.start_info.delete');
+
+    /* End info */
+    Route::post('module/end_info', [App\Http\Controllers\DashboardController::class, 'addModuleEndInfo'])->name('dashboard.module.end_info');
+    Route::get('module/end_info/{id}', [App\Http\Controllers\DashboardController::class, 'deleteModuleEndInfo'])->name('dashboard.module.end_info.delete');
 });

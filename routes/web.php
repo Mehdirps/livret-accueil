@@ -60,4 +60,8 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     /* Utils phone */
     Route::post('module/utils_phone', [App\Http\Controllers\DashboardController::class, 'addModuleUtilsPhone'])->name('dashboard.module.utils_phone');
     Route::get('module/utils_phone/{id}', [App\Http\Controllers\DashboardController::class, 'deleteModuleUtilsPhone'])->name('dashboard.module.utils_phone.delete');
+
+    /* Utils infos */
+    Route::post('module/utils_infos', [App\Http\Controllers\DashboardController::class, 'addModuleUtilsInfos'])->name('dashboard.module.utils_infos');
+    Route::get('module/utils_infos/{id}', [App\Http\Controllers\DashboardController::class, 'deleteModuleUtilsInfos'])->name('dashboard.module.utils_infos.delete');
 });

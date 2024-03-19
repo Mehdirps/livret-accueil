@@ -72,7 +72,9 @@
         <div class="col-md-3">
             <div class="card text-center">
                 <i class="bi bi-info-circle"></i>
-                <h2>Infos pratiques</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#utilsInfosModal">
+                    Infos pratiques
+                </button>
             </div>
         </div>
         <div class="col-md-3">
@@ -97,4 +99,5 @@
     @include('dashboard.partials.module_wifi')
     @include('dashboard.partials.module_digicode')
     @include('dashboard.partials.module_utils_phone')
+    @include('dashboard.partials.module_utils_infos')
 @endsection

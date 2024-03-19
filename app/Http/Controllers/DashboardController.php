@@ -8,6 +8,7 @@ use App\Models\Background;
 use App\Models\BackgroundGroup;
 use App\Models\Livret;
 use App\Models\ModuleDigicode;
+use App\Models\ModuleUtilsPhone;
 use App\Models\ModuleWifi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -209,5 +210,26 @@ class DashboardController extends Controller
         $digicode->delete();
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre digicode a été supprimé avec succès');
+    }
+
+    public function addModuleUtilsPhone(Request $request)
+    {
+        $livret = auth()->user()->livret;
+
+        $utilsPhone = new ModuleUtilsPhone();
+        $utilsPhone->name = $request->name;
+        $utilsPhone->number = $request->number;
+        $utilsPhone->livret = $livret->id;
+        $utilsPhone->save();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre numéro de téléphone a été mis à jour avec succès');
+    }
+
+    public function deleteModuleUtilsPhone($id)
+    {
+        $utilsPhone = ModuleUtilsPhone::find($id);
+        $utilsPhone->delete();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre numéro de téléphone a été supprimé avec succès');
     }
 }

@@ -48,7 +48,7 @@
                                        required>
                             </div>
                             <div class="mb-3">
-                                <label for="text" class="form-label">Numéro</label>
+                                <label for="text" class="form-label">Texte</label>
                                 <textarea class="form-control" id="text" name="text" required>{{ old('text') }}</textarea>
                             </div>
                             <button type="submit" class="btn btn-primary" id="saveDigicode">Sauvegarder</button>

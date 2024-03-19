@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Background;
 use App\Models\BackgroundGroup;
 use App\Models\Livret;
+use App\Models\ModuleDigicode;
 use App\Models\ModuleWifi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -186,5 +187,26 @@ class DashboardController extends Controller
         }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre réseau wifi a été mis à jour avec succès');
+    }
+
+    public function addModuleDigicode(Request $request)
+    {
+        $livret = auth()->user()->livret;
+
+            $digicode = new ModuleDigicode();
+            $digicode->name = $request->name;
+            $digicode->code = $request->code;
+            $digicode->livret = $livret->id;
+            $digicode->save();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre digicode a été mis à jour avec succès');
+    }
+
+    public function deleteModuleDigicode($id)
+    {
+        $digicode = ModuleDigicode::find($id);
+        $digicode->delete();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre digicode a été supprimé avec succès');
     }
 }

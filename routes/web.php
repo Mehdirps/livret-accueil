@@ -49,5 +49,10 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('background/{id}', [App\Http\Controllers\DashboardController::class, 'updateBackground'])->name('dashboard.background.update');
     Route::get('edit_livret', [App\Http\Controllers\DashboardController::class, 'editLivret'])->name('dashboard.edit_livret');
     /* Livret Module */
+    /* Wifi */
     Route::post('module/wifi', [App\Http\Controllers\DashboardController::class, 'moduleWifi'])->name('dashboard.module.wifi');
+
+    /* Digicode */
+    Route::post('module/digicode', [App\Http\Controllers\DashboardController::class, 'addModuleDigicode'])->name('dashboard.module.digicode');
+    Route::get('module/digicode/{id}', [App\Http\Controllers\DashboardController::class, 'deleteModuleDigicode'])->name('dashboard.module.digicode.delete');
 });

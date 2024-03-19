@@ -47,11 +47,12 @@
                 </button>
             </div>
         </div>
-        @include('dashboard.partials.module_wifi')
         <div class="col-md-3">
             <div class="card text-center">
                 <i class="bi bi-key"></i>
-                <h2>Digicode</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#digicodeModal">
+                    Digicode
+                </button>
             </div>
         </div>
         <div class="col-md-3">
@@ -91,4 +92,6 @@
             </div>
         </div>
     </div>
+    @include('dashboard.partials.module_wifi')
+    @include('dashboard.partials.module_digicode')
 @endsection

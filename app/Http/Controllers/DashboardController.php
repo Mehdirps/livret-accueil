@@ -8,6 +8,7 @@ use App\Models\Background;
 use App\Models\BackgroundGroup;
 use App\Models\Livret;
 use App\Models\ModuleDigicode;
+use App\Models\ModuleStartInfos;
 use App\Models\ModuleUtilsInfos;
 use App\Models\ModuleUtilsPhone;
 use App\Models\ModuleWifi;
@@ -252,6 +253,27 @@ class DashboardController extends Controller
     {
         $utilsInfos = ModuleUtilsInfos::find($id);
         $utilsInfos->delete();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information a été supprimé avec succès');
+    }
+
+    public function addModuleStartInfo(Request $request)
+    {
+        $livret = auth()->user()->livret;
+
+        $startInfo = new ModuleStartInfos();
+        $startInfo->name = $request->name;
+        $startInfo->text = $request->text;
+        $startInfo->livret = $livret->id;
+        $startInfo->save();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information a été mis à jour avec succès');
+    }
+
+    public function deleteModuleStartInfo($id)
+    {
+        $startInfo = ModuleStartInfos::find($id);
+        $startInfo->delete();
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information a été supprimé avec succès');
     }

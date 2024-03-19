@@ -80,7 +80,9 @@
         <div class="col-md-3">
             <div class="card text-center">
                 <i class="bi bi-arrow-up-right"></i>
-                <h2>Info arrivée</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#startInfosModal">
+                    Info arrivée
+                </button>
             </div>
         </div>
         <div class="col-md-3">
@@ -100,4 +102,5 @@
     @include('dashboard.partials.module_digicode')
     @include('dashboard.partials.module_utils_phone')
     @include('dashboard.partials.module_utils_infos')
+    @include('dashboard.partials.module_start_infos')
 @endsection

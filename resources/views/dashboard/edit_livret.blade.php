@@ -11,6 +11,7 @@
             background-color: #fff;
             transition: 0.3s;
             height: 150px;
+            width: 150px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -27,13 +28,26 @@
         }
     </style>
     <h1>Editer le livret - <strong>{{$livret->livret_name}}</strong></h1>
+    @if(session('success'))
+        <div class="alert alert-success" role="alert">
+            {{session('success')}}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-error" role="alert">
+            {{session('error')}}
+        </div>
+    @endif
     <div class="row container">
         <div class="col-md-3">
             <div class="card text-center">
                 <i class="bi bi-wifi"></i>
-                <h2>Wifi</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                   Wifi
+                </button>
             </div>
         </div>
+        @include('dashboard.partials.module_wifi')
         <div class="col-md-3">
             <div class="card text-center">
                 <i class="bi bi-key"></i>

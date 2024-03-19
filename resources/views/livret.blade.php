@@ -55,9 +55,34 @@
         .socials div {
             width: max-content;
         }
+
+        .card {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: 0.3s;
+            height: 150px;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .card:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        .card h2{
+            font-size: 1rem;
+        }
+        .card i {
+            font-size: 3rem;
+        }
     </style>
 </head>
-<body style="min-height:100vh;background-image: url({{asset($livret->background)}});background-repeat: no-repeat;background-size: cover">
+<body
+    style="min-height:100vh;background-image: url({{asset($livret->background)}});background-repeat: no-repeat;background-size: cover">
 <main>
     <div class="container py-5 text-center">
         <div class="row justify-content-center">
@@ -71,6 +96,64 @@
                 <h1 class="display-4">{{ $livret->livret_name }}</h1>
                 <p class="lead">{!! nl2br(e($livret->description)) !!}</p>
             </div>
+        </div>
+        <div class="row">
+            @if($livret->wifi)
+                <div class="col-md-2">
+                    <div class="card text-center">
+                        <i class="bi bi-wifi"></i>
+                        Wifi
+                    </div>
+                </div>
+            @endif
+            @if($livret->digicode)
+                <div class="col-md-2">
+                    <div class="card text-center">
+                        <i class="bi bi-key-fill"></i>
+                        Digicode
+                    </div>
+                </div>
+            @endif
+            @if($livret->endInfos)
+                <div class="col-md-2">
+                    <div class="card text-center">
+                        <i class="bi bi-info-circle-fill"></i>
+                        End Infos
+                    </div>
+                </div>
+            @endif
+            @if($livret->homeInfos)
+                <div class="col-md-2">
+                    <div class="card text-center">
+                        <i class="bi bi-house-fill"></i>
+                        Home Infos
+                    </div>
+                </div>
+            @endif
+            @if(!$livret->utilsPhone->isEmpty())
+                <div class="col-md-2">
+                    <div class="card text-center">
+                        <i class="bi bi-telephone-fill"></i>
+                        Utils Phone
+                    </div>
+                </div>
+            @endif
+            @if(!$livret->startInfos->isEmpty())
+                <div class="col-md-2">
+                    <div class="card text-center">
+                        <i class="bi bi-info-circle-fill"></i>
+                        Start Infos
+                    </div>
+                </div>
+            @endif
+            @if(!$livret->utilsInfos->isEmpty())
+                <div class="col-md-2">
+                    <div class="card text-center">
+                        <i class="bi bi-info-circle-fill"></i>
+                        Utils Infos
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </main>

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Background;
 use App\Models\BackgroundGroup;
 use App\Models\Livret;
+use App\Models\ModuleWifi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -165,5 +166,25 @@ class DashboardController extends Controller
         return view('dashboard.edit_livret', [
             'livret' => $livret,
         ]);
+    }
+
+    public function moduleWifi(Request $request)
+    {
+        $livret = auth()->user()->livret;
+
+        if ($livret->wifi) {
+            $wifi = $livret->wifi;
+            $wifi->ssid = $request->wifiName;
+            $wifi->password = $request->wifiPassword;
+            $wifi->save();
+        } else {
+            $wifi = new ModuleWifi();
+            $wifi->ssid = $request->wifiName;
+            $wifi->password = $request->wifiPassword;
+            $wifi->livret = $livret->id;
+            $wifi->save();
+        }
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre réseau wifi a été mis à jour avec succès');
     }
 }

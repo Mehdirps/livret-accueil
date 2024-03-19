@@ -96,7 +96,9 @@
         <div class="col-md-3">
             <div class="card text-center">
                 <i class="bi bi-envelope"></i>
-                <h2>Mot d'accueil</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#homeInfosModal">
+                    Mot d'accueil
+                </button>
             </div>
         </div>
     </div>
@@ -106,4 +108,5 @@
     @include('dashboard.partials.module_utils_infos')
     @include('dashboard.partials.module_start_infos')
     @include('dashboard.partials.module_end_infos')
+    @include('dashboard.partials.module_home_infos')
 @endsection

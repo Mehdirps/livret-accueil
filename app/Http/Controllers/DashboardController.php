@@ -9,6 +9,7 @@ use App\Models\BackgroundGroup;
 use App\Models\Livret;
 use App\Models\ModuleDigicode;
 use App\Models\ModuleEndInfos;
+use App\Models\ModuleHome;
 use App\Models\ModuleStartInfos;
 use App\Models\ModuleUtilsInfos;
 use App\Models\ModuleUtilsPhone;
@@ -300,5 +301,31 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre de départ information a été supprimé avec succès');
     }
 
+    public function addModuleHomeInfos(Request $request)
+    {
+        $livret = auth()->user()->livret;
+        if($livret->homeInfos) {
+            $homeInfos = $livret->homeInfos;
+            $homeInfos->name = $request->name;
+            $homeInfos->text = $request->text;
+            $homeInfos->save();
+        }else{
+            $homeInfos = new ModuleHome();
+            $homeInfos->name = $request->name;
+            $homeInfos->text = $request->text;
+            $homeInfos->livret = $livret->id;
+            $homeInfos->save();
+        }
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information de départ a été mis à jour avec succès');
+    }
+
+    public function deleteModuleHomeInfos($id)
+    {
+        $homeInfos = ModuleHome::find($id);
+        $homeInfos->delete();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre de départ information a été supprimé avec succès');
+    }
 
 }

@@ -25,7 +25,7 @@ class Livret extends Model
 
     public function wifi()
     {
-        return $this->hasOne(ModuleWifi::class, 'livret');
+        return $this->hasMany(ModuleWifi::class, 'livret');
     }
 
     public function digicode()

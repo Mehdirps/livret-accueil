@@ -50,7 +50,8 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('edit_livret', [App\Http\Controllers\DashboardController::class, 'editLivret'])->name('dashboard.edit_livret');
     /* Livret Module */
     /* Wifi */
-    Route::post('module/wifi', [App\Http\Controllers\DashboardController::class, 'moduleWifi'])->name('dashboard.module.wifi');
+    Route::post('module/wifi', [App\Http\Controllers\DashboardController::class, 'addModuleWifi'])->name('dashboard.module.wifi');
+    Route::get('module/wifi/{id}', [App\Http\Controllers\DashboardController::class, 'deleteModuleWifi'])->name('dashboard.module.wifi.delete');
 
     /* Digicode */
     Route::post('module/digicode', [App\Http\Controllers\DashboardController::class, 'addModuleDigicode'])->name('dashboard.module.digicode');

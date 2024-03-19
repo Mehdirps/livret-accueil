@@ -106,7 +106,7 @@
                     </div>
                 </div>
             @endif
-            @if($livret->digicode)
+            @if(!$livret->digicode->isEmpty())
                 <div class="col-md-2">
                     <div class="card text-center">
                         <i class="bi bi-key-fill"></i>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             @endif
-            @if($livret->endInfos)
+            @if(!$livret->endInfos->isEmpty())
                 <div class="col-md-2">
                     <div class="card text-center">
                         <i class="bi bi-info-circle-fill"></i>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
             @endif
-            @if($livret->homeInfos)
+            @if(!$livret->homeInfos->isEmpty())
                 <div class="col-md-2">
                     <div class="card text-center">
                         <i class="bi bi-house-fill"></i>

@@ -169,35 +169,36 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function moduleWifi(Request $request)
+    public function addModuleWifi(Request $request)
     {
         $livret = auth()->user()->livret;
 
-        if ($livret->wifi) {
-            $wifi = $livret->wifi;
-            $wifi->ssid = $request->wifiName;
-            $wifi->password = $request->wifiPassword;
-            $wifi->save();
-        } else {
-            $wifi = new ModuleWifi();
-            $wifi->ssid = $request->wifiName;
-            $wifi->password = $request->wifiPassword;
-            $wifi->livret = $livret->id;
-            $wifi->save();
-        }
+        $wifi = new ModuleWifi();
+        $wifi->ssid = $request->wifiName;
+        $wifi->password = $request->wifiPassword;
+        $wifi->livret = $livret->id;
+        $wifi->save();
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre réseau wifi a été mis à jour avec succès');
+    }
+
+    public function deleteModuleWifi($id)
+    {
+        $wifi = ModuleWifi::find($id);
+        $wifi->delete();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre réseau wifi a été supprimé avec succès');
     }
 
     public function addModuleDigicode(Request $request)
     {
         $livret = auth()->user()->livret;
 
-            $digicode = new ModuleDigicode();
-            $digicode->name = $request->name;
-            $digicode->code = $request->code;
-            $digicode->livret = $livret->id;
-            $digicode->save();
+        $digicode = new ModuleDigicode();
+        $digicode->name = $request->name;
+        $digicode->code = $request->code;
+        $digicode->livret = $livret->id;
+        $digicode->save();
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre digicode a été mis à jour avec succès');
     }

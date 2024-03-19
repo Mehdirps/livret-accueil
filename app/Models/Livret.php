@@ -40,7 +40,7 @@ class Livret extends Model
 
     public function homeInfos()
     {
-        return $this->hasMany(ModuleHome::class, 'livret');
+        return $this->hasOne(ModuleHome::class, 'livret');
     }
 
     public function utilsPhone()

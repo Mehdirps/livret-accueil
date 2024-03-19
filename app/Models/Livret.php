@@ -30,17 +30,17 @@ class Livret extends Model
 
     public function digicode()
     {
-        return $this->hasOne(ModuleDigicode::class, 'livret');
+        return $this->hasMany(ModuleDigicode::class, 'livret');
     }
 
     public function endInfos()
     {
-        return $this->hasOne(ModuleEndInfos::class, 'livret');
+        return $this->hasMany(ModuleEndInfos::class, 'livret');
     }
 
     public function homeInfos()
     {
-        return $this->hasOne(ModuleHome::class, 'livret');
+        return $this->hasMany(ModuleHome::class, 'livret');
     }
 
     public function utilsPhone()

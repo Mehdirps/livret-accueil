@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LivretRequest;
 use App\Models\Livret;
+use App\Models\LivretView;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,6 +35,12 @@ class LivretController extends Controller
     public function show($slug, $id)
     {
         $livret = Livret::where('id', $id)->where('slug', $slug)->first();
+
+        LivretView::create([
+            'livret_id' => $livret->id,
+            'viewed_at' => now(),
+        ]);
+
         if ($livret) {
             return view('livret', compact('livret'));
         } else {

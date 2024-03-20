@@ -136,13 +136,14 @@
             @endif
             @if(!$livret->endInfos->isEmpty())
                 <div class="col-md-2">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#endInfosModal">
                         <div class="card text-center">
                             <i class="bi bi-info-circle-fill"></i>
                             Infos départ
                         </div>
                     </button>
                 </div>
+                @include('inc.modules_modals.module_end_infos')
             @endif
             @if($livret->homeInfos)
                 <div class="col-md-2">

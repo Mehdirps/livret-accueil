@@ -9,6 +9,8 @@ class LivretView extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['livret_id', 'viewed_at'];
+
     public function livret()
     {
         return $this->belongsTo(Livret::class);

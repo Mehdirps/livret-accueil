@@ -102,7 +102,7 @@
         </div>
         <div class="row">
             @if($livret->wifi)
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-4 col-sm-6">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
                         <div class="card text-center">
                             <i class="bi bi-wifi"></i>
@@ -113,7 +113,7 @@
                 @include('inc.modules_modals.module_wifi')
             @endif
             @if(!$livret->digicode->isEmpty())
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-4 col-sm-6">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#digicodeModal">
                         <div class="card text-center">
                             <i class="bi bi-key-fill"></i>
@@ -124,7 +124,7 @@
                 @include('inc.modules_modals.module_digicode')
             @endif
             @if(!$livret->startInfos->isEmpty())
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-4 col-sm-6">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#startInfosModal">
                         <div class="card text-center">
                             <i class="bi bi-info-circle-fill"></i>
@@ -135,7 +135,7 @@
                 @include('inc.modules_modals.module_start_infos')
             @endif
             @if(!$livret->endInfos->isEmpty())
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-4 col-sm-6">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#endInfosModal">
                         <div class="card text-center">
                             <i class="bi bi-info-circle-fill"></i>
@@ -146,7 +146,7 @@
                 @include('inc.modules_modals.module_end_infos')
             @endif
             @if(!$livret->utilsPhone->isEmpty())
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-4 col-sm-6">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#utilsPhoneModal">
                         <div class="card text-center">
                             <i class="bi bi-telephone-fill"></i>
@@ -157,7 +157,7 @@
                 @include('inc.modules_modals.module_utils_phone')
             @endif
             @if(!$livret->utilsInfos->isEmpty())
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-4 col-sm-6">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#utilsInfosModal">
                         <div class="card text-center">
                             <i class="bi bi-info-circle-fill"></i>

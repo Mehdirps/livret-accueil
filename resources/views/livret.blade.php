@@ -114,50 +114,63 @@
             @endif
             @if(!$livret->digicode->isEmpty())
                 <div class="col-md-2">
-                    <div class="card text-center">
-                        <i class="bi bi-key-fill"></i>
-                        Digicode
-                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#digicodeModal">
+                        <div class="card text-center">
+                            <i class="bi bi-key-fill"></i>
+                            Digicode
+                        </div>
+                    </button>
                 </div>
+                @include('inc.modules_modals.module_digicode')
             @endif
             @if(!$livret->endInfos->isEmpty())
                 <div class="col-md-2">
-                    <div class="card text-center">
-                        <i class="bi bi-info-circle-fill"></i>
-                        Infos départ
-                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                        <div class="card text-center">
+                            <i class="bi bi-info-circle-fill"></i>
+                            Infos départ
+                        </div>
+                    </button>
                 </div>
             @endif
             @if($livret->homeInfos)
                 <div class="col-md-2">
-                    <div class="card text-center">
-                        <i class="bi bi-house-fill"></i>
-                        Infos d'accueil
-                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                        <div class="card text-center">
+                            <i class="bi bi-house-fill"></i>
+                            Infos d'accueil
+                        </div>
+                    </button>
                 </div>
             @endif
             @if(!$livret->utilsPhone->isEmpty())
                 <div class="col-md-2">
-                    <div class="card text-center">
-                        <i class="bi bi-telephone-fill"></i>
-                        Numéro utile
-                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                        <div class="card text-center">
+                            <i class="bi bi-telephone-fill"></i>
+                            Numéro utile
+                        </div>
+                    </button>
                 </div>
             @endif
             @if(!$livret->startInfos->isEmpty())
                 <div class="col-md-2">
-                    <div class="card text-center">
-                        <i class="bi bi-info-circle-fill"></i>
-                        Infos arrivée
-                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                        <div class="card text-center">
+                            <i class="bi bi-info-circle-fill"></i>
+                            Infos arrivée
+                        </div>
+                    </button>
                 </div>
             @endif
             @if(!$livret->utilsInfos->isEmpty())
                 <div class="col-md-2">
-                    <div class="card text-center">
-                        <i class="bi bi-info-circle-fill"></i>
-                        Infos utiles
-                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                        <div class="card text-center">
+                            <i class="bi bi-info-circle-fill"></i>
+                            Infos utiles
+                        </div>
+                    </button>
                 </div>
             @endif
         </div>

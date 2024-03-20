@@ -208,13 +208,16 @@
     </div>
     <script>
         $('#homeInfosModal .btn-close').click(function () {
-            sessionStorage.setItem('homeInfosModal', 'true');
+            $id = $('#homeInfosModal').data('livret');
+            sessionStorage.setItem('homeInfosModalLivret', $id);
         });
-        if (sessionStorage.getItem('homeInfosModal') !== 'true') {
-            $(document).ready(function () {
+        $(document).ready(function () {
+            $id = $('#homeInfosModal').data('livret');
+            if (sessionStorage.getItem('homeInfosModalLivret') != $id) {
                 $('#homeInfosModal').modal('show');
-            });
-        }
+            }
+        });
+
     </script>
 </footer>
 </body>

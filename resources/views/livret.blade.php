@@ -70,12 +70,15 @@
             align-items: center;
             cursor: pointer;
         }
+
         .card:hover {
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
-        .card h2{
+
+        .card h2 {
             font-size: 1rem;
         }
+
         .card i {
             font-size: 3rem;
         }
@@ -100,11 +103,14 @@
         <div class="row">
             @if($livret->wifi)
                 <div class="col-md-2">
-                    <div class="card text-center">
-                        <i class="bi bi-wifi"></i>
-                        Wifi
-                    </div>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                        <div class="card text-center">
+                            <i class="bi bi-wifi"></i>
+                            Wifi
+                        </div>
+                    </button>
                 </div>
+                @include('inc.modules_modals.module_wifi')
             @endif
             @if(!$livret->digicode->isEmpty())
                 <div class="col-md-2">
@@ -118,15 +124,15 @@
                 <div class="col-md-2">
                     <div class="card text-center">
                         <i class="bi bi-info-circle-fill"></i>
-                        End Infos
+                        Infos départ
                     </div>
                 </div>
             @endif
-            @if(!$livret->homeInfos->isEmpty())
+            @if($livret->homeInfos)
                 <div class="col-md-2">
                     <div class="card text-center">
                         <i class="bi bi-house-fill"></i>
-                        Home Infos
+                        Infos d'accueil
                     </div>
                 </div>
             @endif
@@ -134,7 +140,7 @@
                 <div class="col-md-2">
                     <div class="card text-center">
                         <i class="bi bi-telephone-fill"></i>
-                        Utils Phone
+                        Numéro utile
                     </div>
                 </div>
             @endif
@@ -142,7 +148,7 @@
                 <div class="col-md-2">
                     <div class="card text-center">
                         <i class="bi bi-info-circle-fill"></i>
-                        Start Infos
+                        Infos arrivée
                     </div>
                 </div>
             @endif
@@ -150,7 +156,7 @@
                 <div class="col-md-2">
                     <div class="card text-center">
                         <i class="bi bi-info-circle-fill"></i>
-                        Utils Infos
+                        Infos utiles
                     </div>
                 </div>
             @endif

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Background;
 use App\Models\BackgroundGroup;
 use App\Models\Livret;
+use App\Models\LivretView;
 use App\Models\ModuleDigicode;
 use App\Models\ModuleEndInfos;
 use App\Models\ModuleHome;
@@ -304,12 +305,12 @@ class DashboardController extends Controller
     public function addModuleHomeInfos(Request $request)
     {
         $livret = auth()->user()->livret;
-        if($livret->homeInfos) {
+        if ($livret->homeInfos) {
             $homeInfos = $livret->homeInfos;
             $homeInfos->name = $request->name;
             $homeInfos->text = $request->text;
             $homeInfos->save();
-        }else{
+        } else {
             $homeInfos = new ModuleHome();
             $homeInfos->name = $request->name;
             $homeInfos->text = $request->text;
@@ -326,6 +327,47 @@ class DashboardController extends Controller
         $homeInfos->delete();
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre de départ information a été supprimé avec succès');
+    }
+
+    public function stats(Request $request)
+    {
+        $livret = auth()->user()->livret;
+
+        $totalViews = LivretView::where('livret_id', $livret->id)->count();
+
+        $viewsThisWeek = LivretView::where('livret_id', $livret->id)
+            ->whereBetween('viewed_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->count();
+
+        $viewsToday = LivretView::where('livret_id', $livret->id)
+            ->whereDate('viewed_at', today())
+            ->count();
+
+        $viewsThisMonth = LivretView::where('livret_id', $livret->id)
+            ->whereBetween('viewed_at', [now()->startOfMonth(), now()->endOfMonth()])
+            ->count();
+
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+
+        $viewsBetweenDates = null;
+        if ($startDate && $endDate) {
+            $endDate = $endDate . ' 23:59:59';
+            $viewsBetweenDates = LivretView::where('livret_id', $livret->id)
+                ->whereBetween('viewed_at', [$startDate, $endDate])
+                ->count();
+        }
+
+        return view('dashboard.stats', [
+            'livret' => $livret,
+            'totalViews' => $totalViews,
+            'viewsThisWeek' => $viewsThisWeek,
+            'viewsToday' => $viewsToday,
+            'viewsThisMonth' => $viewsThisMonth,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'viewsBetweenDates' => $viewsBetweenDates,
+        ]);
     }
 
 }

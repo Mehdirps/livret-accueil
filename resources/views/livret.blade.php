@@ -167,16 +167,9 @@
                 </div>
                 @include('inc.modules_modals.module_utils_infos')
             @endif
-                @if($livret->homeInfos)
-                    <div class="col-md-2">
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
-                            <div class="card text-center">
-                                <i class="bi bi-house-fill"></i>
-                                Infos d'accueil
-                            </div>
-                        </button>
-                    </div>
-                @endif
+            @if($livret->homeInfos)
+                @include('inc.modules_modals.module_home_infos')
+            @endif
         </div>
     </div>
 </main>
@@ -213,6 +206,16 @@
             </div>
         @endif
     </div>
+    <script>
+        $('#homeInfosModal .btn-close').click(function () {
+            sessionStorage.setItem('homeInfosModal', 'true');
+        });
+        if (sessionStorage.getItem('homeInfosModal') !== 'true') {
+            $(document).ready(function () {
+                $('#homeInfosModal').modal('show');
+            });
+        }
+    </script>
 </footer>
 </body>
 </html>

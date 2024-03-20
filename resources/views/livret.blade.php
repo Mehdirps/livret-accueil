@@ -123,6 +123,17 @@
                 </div>
                 @include('inc.modules_modals.module_digicode')
             @endif
+            @if(!$livret->startInfos->isEmpty())
+                <div class="col-md-2">
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#startInfosModal">
+                        <div class="card text-center">
+                            <i class="bi bi-info-circle-fill"></i>
+                            Infos arrivée
+                        </div>
+                    </button>
+                </div>
+                @include('inc.modules_modals.module_start_infos')
+            @endif
             @if(!$livret->endInfos->isEmpty())
                 <div class="col-md-2">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
@@ -149,16 +160,6 @@
                         <div class="card text-center">
                             <i class="bi bi-telephone-fill"></i>
                             Numéro utile
-                        </div>
-                    </button>
-                </div>
-            @endif
-            @if(!$livret->startInfos->isEmpty())
-                <div class="col-md-2">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
-                        <div class="card text-center">
-                            <i class="bi bi-info-circle-fill"></i>
-                            Infos arrivée
                         </div>
                     </button>
                 </div>

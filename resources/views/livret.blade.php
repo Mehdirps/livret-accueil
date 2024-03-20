@@ -145,22 +145,23 @@
                 </div>
                 @include('inc.modules_modals.module_end_infos')
             @endif
+            @if(!$livret->utilsPhone->isEmpty())
+                <div class="col-md-2">
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#utilsPhoneModal">
+                        <div class="card text-center">
+                            <i class="bi bi-telephone-fill"></i>
+                            Numéro utile
+                        </div>
+                    </button>
+                </div>
+                @include('inc.modules_modals.module_utils_phone')
+            @endif
             @if($livret->homeInfos)
                 <div class="col-md-2">
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
                         <div class="card text-center">
                             <i class="bi bi-house-fill"></i>
                             Infos d'accueil
-                        </div>
-                    </button>
-                </div>
-            @endif
-            @if(!$livret->utilsPhone->isEmpty())
-                <div class="col-md-2">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
-                        <div class="card text-center">
-                            <i class="bi bi-telephone-fill"></i>
-                            Numéro utile
                         </div>
                     </button>
                 </div>

@@ -102,9 +102,9 @@
         </div>
         <div class="row">
             @if($livret->wifi)
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#wifiModal">
-                        <div class="card text-center">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                        <div class="card text-center w-100">
                             <i class="bi bi-wifi"></i>
                             Wifi
                         </div>
@@ -113,9 +113,9 @@
                 @include('inc.modules_modals.module_wifi')
             @endif
             @if(!$livret->digicode->isEmpty())
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#digicodeModal">
-                        <div class="card text-center">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#digicodeModal">
+                        <div class="card text-center w-100">
                             <i class="bi bi-key-fill"></i>
                             Digicode
                         </div>
@@ -124,9 +124,9 @@
                 @include('inc.modules_modals.module_digicode')
             @endif
             @if(!$livret->startInfos->isEmpty())
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#startInfosModal">
-                        <div class="card text-center">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#startInfosModal">
+                        <div class="card text-center w-100">
                             <i class="bi bi-info-circle-fill"></i>
                             Infos arrivée
                         </div>
@@ -135,9 +135,9 @@
                 @include('inc.modules_modals.module_start_infos')
             @endif
             @if(!$livret->endInfos->isEmpty())
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#endInfosModal">
-                        <div class="card text-center">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#endInfosModal">
+                        <div class="card text-center w-100">
                             <i class="bi bi-info-circle-fill"></i>
                             Infos départ
                         </div>
@@ -146,20 +146,20 @@
                 @include('inc.modules_modals.module_end_infos')
             @endif
             @if(!$livret->utilsPhone->isEmpty())
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#utilsPhoneModal">
-                        <div class="card text-center">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#utilsPhoneModal">
+                        <div class="card text-center w-100">
                             <i class="bi bi-telephone-fill"></i>
-                            Numéro utile
+                            Numéros utile
                         </div>
                     </button>
                 </div>
                 @include('inc.modules_modals.module_utils_phone')
             @endif
             @if(!$livret->utilsInfos->isEmpty())
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#utilsInfosModal">
-                        <div class="card text-center">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#utilsInfosModal">
+                        <div class="card text-center w-100">
                             <i class="bi bi-info-circle-fill"></i>
                             Infos utiles
                         </div>
@@ -167,13 +167,24 @@
                 </div>
                 @include('inc.modules_modals.module_utils_infos')
             @endif
+            @if(!$livret->placeGroups->isEmpty() && !$livret->NearbyPlaces->isEmpty())
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#placesGroupsModal">
+                        <div class="card text-center w-100">
+                            <i class="bi bi-geo-alt-fill"></i>
+                           Lieux à proximité
+                        </div>
+                    </button>
+                </div>
+                @include('inc.modules_modals.module_places_groups')
+            @endif
             @if($livret->homeInfos)
                 @include('inc.modules_modals.module_home_infos')
             @endif
         </div>
     </div>
 </main>
-<footer class="container">
+<footer class="container mb-5">
     <div class="row socials">
         @if($livret->establishment_website)
             <div class="col-md-2">

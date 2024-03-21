@@ -17,12 +17,15 @@
             align-items: center;
             cursor: pointer;
         }
+
         .card:hover {
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
-        .card h2{
+
+        .card h2 {
             font-size: 1rem;
         }
+
         .card i {
             font-size: 3rem;
         }
@@ -43,7 +46,7 @@
             <div class="card text-center">
                 <i class="bi bi-wifi"></i>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#wifiModal">
-                   Wifi
+                    Wifi
                 </button>
             </div>
         </div>
@@ -58,9 +61,22 @@
         <div class="col-md-3">
             <div class="card text-center">
                 <i class="bi bi-geo-alt"></i>
-                <h2>Autour de moi</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#placesGroupsModal">
+                    Groupes de lieux
+                </button>
             </div>
         </div>
+        @if(!$livret->placeGroups->isEmpty())
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <i class="bi bi-geo-alt"></i>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#placesModal">
+                        Autour de moi
+                    </button>
+                </div>
+            </div>
+        @endif
         <div class="col-md-3">
             <div class="card text-center">
                 <i class="bi bi-telephone"></i>
@@ -109,4 +125,6 @@
     @include('dashboard.partials.module_start_infos')
     @include('dashboard.partials.module_end_infos')
     @include('dashboard.partials.module_home_infos')
+    @include('dashboard.partials.module_nearby_places')
+    @include('dashboard.partials.module_places_groups')
 @endsection

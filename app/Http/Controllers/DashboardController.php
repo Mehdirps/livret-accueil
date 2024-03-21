@@ -15,6 +15,8 @@ use App\Models\ModuleStartInfos;
 use App\Models\ModuleUtilsInfos;
 use App\Models\ModuleUtilsPhone;
 use App\Models\ModuleWifi;
+use App\Models\NearbyPlace;
+use App\Models\PlaceGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -368,6 +370,49 @@ class DashboardController extends Controller
             'endDate' => $endDate,
             'viewsBetweenDates' => $viewsBetweenDates,
         ]);
+    }
+
+    public function addModulePlacesGroups(Request $request)
+    {
+        $livret = auth()->user()->livret;
+        $placeGroup = new PlaceGroup();
+        $placeGroup->name = $request->groupName;
+        $placeGroup->livret_id = $livret->id;
+        $placeGroup->save();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre groupe a été ajouté avec succès');
+    }
+
+    public function deleteModulePlacesGroups($id)
+    {
+        $placeGroup = PlaceGroup::find($id);
+        $placeGroup->delete();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre groupe a été supprimé avec succès');
+    }
+
+    public function addModuleNearbyPlaces(Request $request)
+    {
+        $livret = auth()->user()->livret;
+        $nearbyPlace = new NearbyPlace();
+        $nearbyPlace->name = $request->placeName;
+        $nearbyPlace->address = $request->placeAddress;
+        $nearbyPlace->phone = $request->placePhone;
+        $nearbyPlace->description = $request->placeDescription;
+        $nearbyPlace->place_group_id = $request->placeGroup;
+        $nearbyPlace->travel_time = $request->travelTime;
+        $nearbyPlace->livret_id = $livret->id;
+        $nearbyPlace->save();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre groupe a été ajouté avec succès');
+    }
+
+    public function deleteModuleNearbyPlaces($id)
+    {
+        $nearbyPlace = NearbyPlace::find($id);
+        $nearbyPlace->delete();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre groupe a été supprimé avec succès');
     }
 
 }

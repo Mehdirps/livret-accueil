@@ -76,4 +76,12 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
 
     /* Home Infos */
     Route::post('module/home_infos', [App\Http\Controllers\DashboardController::class, 'addModuleHomeInfos'])->name('dashboard.module.home_infos');
+
+    /* Places groups */
+    Route::post('module/places_groups', [App\Http\Controllers\DashboardController::class, 'addModulePlacesGroups'])->name('dashboard.module.places_groups');
+    Route::get('module/places_groups/{id}', [App\Http\Controllers\DashboardController::class, 'deleteModulePlacesGroups'])->name('dashboard.module.places_groups.delete');
+
+    /* Nearby Places */
+    Route::post('module/nearby_places', [App\Http\Controllers\DashboardController::class, 'addModuleNearbyPlaces'])->name('dashboard.module.nearby_places');
+    Route::get('module/nearby_places/{id}', [App\Http\Controllers\DashboardController::class, 'deleteModuleNearbyPlaces'])->name('dashboard.module.nearby_places.delete');
 });

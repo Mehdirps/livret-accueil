@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                @if(!$livret->startInfos->isEmpty())
+                @if(!$livret->endInfos->isEmpty())
                     <table class="table table-striped">
                         <thead>
                         <tr>

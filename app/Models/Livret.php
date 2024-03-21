@@ -63,4 +63,9 @@ class Livret extends Model
         return $this->hasMany(PlaceGroup::class);
     }
 
+    public function NearbyPlaces()
+    {
+        return $this->hasMany(NearbyPlace::class);
+    }
+
 }

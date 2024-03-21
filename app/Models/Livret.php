@@ -58,4 +58,9 @@ class Livret extends Model
         return $this->hasMany(ModuleUtilsInfos::class, 'livret');
     }
 
+    public function placeGroups()
+    {
+        return $this->hasMany(PlaceGroup::class);
+    }
+
 }

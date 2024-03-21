@@ -79,24 +79,15 @@
                     Nous contacter
                 </button>
             </ul>
-            {{-- <div class="dropdown">
-                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                     Moi
-                 </a>
-                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                     <li><a class="dropdown-item" href="#">New project...</a></li>
-                     <li><a class="dropdown-item" href="#">Settings</a></li>
-                     <li><a class="dropdown-item" href="#">Profile</a></li>
-                     <li>
-                         <hr class="dropdown-divider">
-                     </li>
-                     <li></li>
-                 </ul>
-             </div>--}}
+            <ul>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#shareModal">
+                    Partager
+                </button>
+            </ul>
         </div>
     </div>
     @include('dashboard.partials.contact_modal')
+    @include('dashboard.partials.share_modal')
     <div class="col-md-9 col-10">
         <main>
             @yield('dashboard_content')
@@ -110,6 +101,15 @@
                 </div>
             </div>
             @yield('footer_script')
+            <script>
+                function copyLink() {
+                    var copyText = document.getElementById("shareLink");
+                    copyText.select();
+                    copyText.setSelectionRange(0, 99999);
+                    document.execCommand("copy");
+                    alert("Lien copié: " + copyText.value);
+                }
+            </script>
         </footer>
     </div>
 </div>

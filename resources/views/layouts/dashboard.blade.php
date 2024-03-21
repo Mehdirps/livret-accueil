@@ -34,19 +34,26 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="{{route('dashboard.index')}}" class="nav-link text-white {{ Route::currentRouteNamed('dashboard.index') ? 'active' : '' }}" aria-current="page">
+                    <a href="{{route('dashboard.index')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('dashboard.index') ? 'active' : '' }}"
+                       aria-current="page">
                         <i class="bi bi-speedometer2"></i> Tableau de bord
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-book"></i> Mon livret d'accueil
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{route('dashboard.edit_livret')}}">Editer</a></li>
                         <li><a class="dropdown-item" href="{{route('dashboard.background')}}">Changer le fond</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{route('livret.show',[\Illuminate\Support\Facades\Auth::user()->livret->slug,\Illuminate\Support\Facades\Auth::user()->livret->id])}}">Voir</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item"
+                               href="{{route('livret.show',[\Illuminate\Support\Facades\Auth::user()->livret->slug,\Illuminate\Support\Facades\Auth::user()->livret->id])}}">Voir</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -55,7 +62,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('dashboard.profile')}}" class="nav-link text-white {{ Route::currentRouteNamed('dashboard.profile') ? 'active' : '' }}">
+                    <a href="{{route('dashboard.profile')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('dashboard.profile') ? 'active' : '' }}">
                         <i class="bi bi-person"></i> Mon profil
                     </a>
                 </li>
@@ -66,6 +74,11 @@
                 </li>
             </ul>
             <hr>
+            <ul>
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#contactModal">
+                    Nous contacter
+                </button>
+            </ul>
             {{-- <div class="dropdown">
                  <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                     id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -83,6 +96,7 @@
              </div>--}}
         </div>
     </div>
+    @include('dashboard.partials.contact_modal')
     <div class="col-md-9 col-10">
         <main>
             @yield('dashboard_content')

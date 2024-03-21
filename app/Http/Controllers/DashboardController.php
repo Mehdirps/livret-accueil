@@ -19,6 +19,8 @@ use App\Models\NearbyPlace;
 use App\Models\PlaceGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class DashboardController extends Controller
 {
@@ -413,6 +415,54 @@ class DashboardController extends Controller
         $nearbyPlace->delete();
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre groupe a été supprimé avec succès');
+    }
+
+    public function contactSupport(Request $request)
+    {
+        if($request->rgpd !== 'on') {
+            return redirect()->route('dashboard.index')->with('error', 'Vous devez accepter les conditions d\'utilisation pour pouvoir envoyer un message');
+        }
+
+        $request->validate([
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        $user = auth()->user();
+
+        try {
+
+            $mail = new PHPMailer();
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'ssl0.ovh.net';
+            $mail->Port = '465';
+            $mail->isHTML(true);
+            $mail->Username = "contact@maplaque-nfc.fr";
+            $mail->Password = "3v;jcPFeUPMBCP9";
+            $mail->SetFrom("contact@maplaque-nfc.fr", "Livret d'accueil");
+            $mail->Subject = 'Nouveau support - Livret d\'accueil';
+            $mail->Body = '
+                <html>
+                <body>
+                  <h1>Demande de support</h1>
+                   <p>De : ' . $user->name . '</p>
+                   <p>Email : ' . $user->email . '</p>
+                   <p>Sujet : ' . $request->subject . '</p>
+                   <p>' . $request->message . '</p>
+                </body>
+                </html>
+            ';
+            $mail->AddAddress('mehdi.raposo77@gmail.com');
+
+            $mail->send();
+
+            return redirect()->route('dashboard.index')->with('success', 'Votre demande de support a été envoyée avec succès');
+        } catch (Exception $e) {
+            return redirect()->route('dashboard.index')->with('error', 'Une erreur est survenue lors de l\'envoi de votre demande de support');
+        }
+
     }
 
 }

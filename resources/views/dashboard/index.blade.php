@@ -24,12 +24,12 @@
             <div class="accordion" id="faqAccordion">
                 <div class="accordion-item">
                     <h3 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             Comment modifier mes informations et celle de mon livret ?
                         </button>
                     </h3>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                          data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
                             Pour modifier vos informations, vous devez vous rendre dans la section "Mon profil" de votre

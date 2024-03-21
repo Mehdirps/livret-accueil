@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+/* CGU */
+Route::get('/cgu', function () {
+    return view('cgu');
+})->name('cgu');
+
 Route::get('/livret/{slug}/{id}', [App\Http\Controllers\LivretController::class, 'show'])->name('livret.show');
 
 /* Authentification */

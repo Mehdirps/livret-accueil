@@ -18,7 +18,7 @@
 <header>
     <nav class="navbar navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Livret d'accueil</a>
+            <a class="navbar-brand" href="{{route('home')}}">Livret d'accueil</a>
         </div>
     </nav>
 </header>
@@ -27,6 +27,14 @@
 </main>
 <footer class="text-center">
     <p>Livret d'accueil - 2024</p>
+    <div class="row">
+        <div class="col-6">
+            <a href="{{ route('cgu') }}">Conditions Générales d'Utilisation</a>
+        </div>
+        {{--<div class="col-6">
+            <a href="{{ route('contact') }}">Contact</a>
+        </div>--}}
+    </div>
     @yield('footer_script')
 </footer>
 </body>

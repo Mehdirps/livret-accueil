@@ -68,6 +68,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('dashboard.suggestions')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('dashboard.suggestions') ? 'active' : '' }}">
+                        <i class="bi bi-file"></i> Mes suggestions
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('dashboard.profile')}}"
                        class="nav-link text-white {{ Route::currentRouteNamed('dashboard.profile') ? 'active' : '' }}">
                         <i class="bi bi-person"></i> Mon profil

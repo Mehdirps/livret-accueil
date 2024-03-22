@@ -486,7 +486,7 @@ class DashboardController extends Controller
             'client_name' => 'required|string',
             'status' => 'required|string',
             'client_comment' => 'nullable|string',
-            'attachment_names.*' => 'nullable|file|mimes:pdf,png,jpeg,webp,jpg|max:2048',
+            'attachment_names.*' => 'nullable|file|mimes:pdf,png,jpeg,webp,jpg',
         ]);
 
         $inventory = new Inventory;

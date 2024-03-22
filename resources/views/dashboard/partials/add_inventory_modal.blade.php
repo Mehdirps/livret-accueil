@@ -61,7 +61,7 @@
                         <label for="attachment_names" class="form-label">Pièces jointes</label>
                         <input type="file" class="form-control" id="attachment_names" name="attachment_names[]" multiple
                                accept=".pdf,.png,.jpeg,.webp,.jpg">
-                        @error('attachment_names')
+                        @error('attachment_names.*')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>

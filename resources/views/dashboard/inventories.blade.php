@@ -29,6 +29,7 @@
                     <th>Commentaire du client</th>
                     <th>Status</th>
                     <th>Pièces jointes</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,6 +69,17 @@
                                     Aucune pièce jointe
                                 @endif
                             </td>
+                            <td>
+                                <form action="{{ route('dashboard.inventories.delete', $inventory->id) }}"
+                                      method="post"
+                                      class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Voulez-vous vraiment supprimer cet état des lieux ?')">
+                                        Supprimer
+                                    </button>
+                                </form>
                         </tr>
                     @endforeach
                 @else

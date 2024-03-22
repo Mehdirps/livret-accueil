@@ -94,6 +94,7 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('/inventories', [App\Http\Controllers\DashboardController::class, 'inventories'])->name('dashboard.inventories');
     Route::post('/inventories', [App\Http\Controllers\DashboardController::class, 'addInventory'])->name('dashboard.inventories.add');
     Route::post('/inventories/update', [App\Http\Controllers\DashboardController::class, 'statusInventory'])->name('dashboard.inventories.status');
+    Route::delete('/inventories/{id}', [App\Http\Controllers\DashboardController::class, 'deleteInventory'])->name('dashboard.inventories.delete');
 
     /* Contact */
     Route::post('module/contact', [App\Http\Controllers\DashboardController::class, 'contactSupport'])->name('dashboard.contact');

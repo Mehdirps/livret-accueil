@@ -527,4 +527,23 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.inventories')->with('success', 'Le status de l\'état des lieux a été mis à jour avec succès');
     }
 
+    public function deleteInventory($id)
+    {
+        $inventory = Inventory::find($id);
+
+        $attachments = json_decode($inventory->attachment_names);
+
+        if ($attachments) {
+            foreach ($attachments as $attachment) {
+                if (file_exists(public_path($attachment))) {
+                    unlink(public_path($attachment));
+                }
+            }
+        }
+
+        $inventory->delete();
+
+        return redirect()->route('dashboard.inventories')->with('success', 'L\'état des lieux a été supprimé avec succès');
+    }
+
 }

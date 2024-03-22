@@ -98,4 +98,8 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
 
     /* Contact */
     Route::post('module/contact', [App\Http\Controllers\DashboardController::class, 'contactSupport'])->name('dashboard.contact');
+
+    /* Suggestions */
+    Route::get('suggestions', [App\Http\Controllers\DashboardController::class, 'suggestions'])->name('dashboard.suggestions');
+    Route::get('suggestion/enable/{id}', [App\Http\Controllers\DashboardController::class, 'enableSuggestion'])->name('dashboard.suggestion.enable');
 });

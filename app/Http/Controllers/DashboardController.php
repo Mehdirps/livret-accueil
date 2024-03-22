@@ -546,4 +546,24 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.inventories')->with('success', 'L\'état des lieux a été supprimé avec succès');
     }
 
+    public function suggestions()
+    {
+        $livret = auth()->user()->livret;
+        $suggestions = $livret->suggestions()->paginate(15);
+
+        return view('dashboard.suggestions', [
+            'livret' => $livret,
+            'suggestions' => $suggestions,
+        ]);
+    }
+
+    public function enableSuggestion($id)
+    {
+        $livret = Livret::find($id);
+        $livret->suggest = !$livret->suggest;
+        $livret->save();
+
+        return redirect()->route('dashboard.suggestions')->with('success', 'La suggestion a été mise à jour avec succès');
+    }
+
 }

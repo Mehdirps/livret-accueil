@@ -6,6 +6,7 @@ use App\Http\Requests\LivretRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Background;
 use App\Models\BackgroundGroup;
+use App\Models\Inventory;
 use App\Models\Livret;
 use App\Models\LivretView;
 use App\Models\ModuleDigicode;
@@ -419,7 +420,7 @@ class DashboardController extends Controller
 
     public function contactSupport(Request $request)
     {
-        if($request->rgpd !== 'on') {
+        if ($request->rgpd !== 'on') {
             return redirect()->route('dashboard.index')->with('error', 'Vous devez accepter les conditions d\'utilisation pour pouvoir envoyer un message');
         }
 
@@ -463,6 +464,67 @@ class DashboardController extends Controller
             return redirect()->route('dashboard.index')->with('error', 'Une erreur est survenue lors de l\'envoi de votre demande de support');
         }
 
+    }
+
+    public function inventories()
+    {
+        $livret = auth()->user()->livret;
+        $inventories = Inventory::where('livret_id', $livret->id)->paginate(15);
+
+        return view('dashboard.inventories', [
+            'livret' => $livret,
+            'inventories' => $inventories,
+        ]);
+    }
+
+    public function addInventory(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'client_name' => 'required|string',
+            'status' => 'required|string',
+            'client_comment' => 'nullable|string',
+            'attachment_names.*' => 'nullable|file|mimes:pdf,png,jpeg,webp,jpg|max:2048',
+        ]);
+
+        $inventory = new Inventory;
+        $inventory->livret_id = auth()->user()->livret->id;
+        $inventory->start_date = $request->start_date;
+        $inventory->end_date = $request->end_date;
+        $inventory->client_name = $request->client_name;
+        $inventory->status = $request->status;
+        $inventory->client_comment = $request->client_comment;
+
+        if ($request->hasFile('attachment_names')) {
+            $attachments = [];
+            $i = 0;
+            foreach ($request->file('attachment_names') as $attachment) {
+                $filename = $i . time() . '.' . $attachment->getClientOriginalExtension();
+                $attachment->move(public_path('assets/uploads/inventory_attachments'), $filename);
+                $attachments[] = 'assets/uploads/inventory_attachments/' . $filename;
+                $i++;
+            }
+            $inventory->attachment_names = json_encode($attachments);
+        }
+
+        $inventory->save();
+
+        return redirect()->route('dashboard.inventories')->with('success', 'Etat des lieux ajouté avec succès');
+    }
+
+    public function statusInventory(Request $request)
+    {
+        $request->validate([
+            'status' => 'required|string',
+            'inventory_id' => 'required|integer',
+        ]);
+
+        $inventory = Inventory::find($request->inventory_id);
+        $inventory->status = $request->status;
+        $inventory->save();
+
+        return redirect()->route('dashboard.inventories')->with('success', 'Etat des lieux mis à jour avec succès');
     }
 
 }

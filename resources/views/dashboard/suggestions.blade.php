@@ -19,6 +19,33 @@
                 les suggestions</a>
         @endif
         @if(count($livret->suggestions) > 0)
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <div class="alert alert-success" role="alert">
+                        Suggestions acceptées : {{ $livret->suggestions->where('status', 'accepted')->count() }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="alert alert-danger" role="alert">
+                        Suggestions refusées : {{ $livret->suggestions->where('status', 'refused')->count() }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 btn btn-primary" id="all">
+                    Tout
+                </div>
+                <div class="col-md-3 btn btn-success" id="accepted">
+                    Acceptées
+                </div>
+                <div class="col-md-3 btn btn-danger" id="refused">
+                    Refusées
+                </div>
+                <div class="col-md-3 btn btn-warning" id="pending">
+                    En attente
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -33,7 +60,7 @@
                     </thead>
                     <tbody>
                     @foreach($livret->suggestions as $suggestion)
-                        <tr>
+                        <tr data-status="{{ $suggestion->status }}" class="tr_data">
                             <td>{{ $suggestion->name }}</td>
                             <td>{{ $suggestion->email }}</td>
                             <td>{{ $suggestion->title }}</td>
@@ -80,6 +107,38 @@
         $('.status_suggest').change(function () {
             console.log('fagafga')
             $(this).parent().submit();
+        });
+        $('#accepted').click(function () {
+            $('.tr_data').each(function () {
+                if ($(this).data('status') === 'accepted') {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+        $('#refused').click(function () {
+            $('.tr_data').each(function () {
+                if ($(this).data('status') === 'refused') {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+        $('#pending').click(function () {
+            $('.tr_data').each(function () {
+                if ($(this).data('status') === 'pending') {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+        $('#all').click(function () {
+            $('.tr_data').each(function () {
+                $(this).show();
+            });
         });
     </script>
 @endsection

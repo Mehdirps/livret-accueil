@@ -44,7 +44,7 @@
                                 <form action="{{route('dashboard.inventories.status')}}" method="post">
                                     @csrf
                                     @method('POST')
-                                    <select name="status" id="status" class="form-control">
+                                    <select name="status" id="status" class="form-control status">
                                         <option
                                             value="in_progress" {{ $inventory->status == 'in_progress' ? 'selected' : '' }}>
                                             En cours
@@ -98,7 +98,7 @@
 @endsection
 @section('footer_script')
     <script>
-        $('#status').change(function () {
+        $('.status').change(function () {
             $(this).parent().submit();
         });
     </script>

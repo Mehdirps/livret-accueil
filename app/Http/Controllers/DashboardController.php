@@ -524,7 +524,7 @@ class DashboardController extends Controller
         $inventory->status = $request->status;
         $inventory->save();
 
-        return redirect()->route('dashboard.inventories')->with('success', 'Etat des lieux mis à jour avec succès');
+        return redirect()->route('dashboard.inventories')->with('success', 'Le status de l\'état des lieux a été mis à jour avec succès');
     }
 
 }

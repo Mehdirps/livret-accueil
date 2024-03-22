@@ -62,6 +62,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('dashboard.inventories')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('dashboard.inventories') ? 'active' : '' }}">
+                        <i class="bi bi-journal-text"></i> Etats de lieux
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('dashboard.profile')}}"
                        class="nav-link text-white {{ Route::currentRouteNamed('dashboard.profile') ? 'active' : '' }}">
                         <i class="bi bi-person"></i> Mon profil

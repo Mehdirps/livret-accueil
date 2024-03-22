@@ -19,6 +19,17 @@
             </div>
         @endif
         <hr>
+        <div class="row">
+            <div class="col-md-3 btn btn-primary" id="all">
+                Tout
+            </div>
+            <div class="col-md-3 btn btn-success" id="completed">
+                Terminées
+            </div>
+            <div class="col-md-3 btn btn-danger" id="in_progress">
+                En cours
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -35,7 +46,7 @@
                 <tbody>
                 @if(count($inventories) > 0)
                     @foreach($inventories as $inventory)
-                        <tr>
+                        <tr data-status="{{$inventory->status}}" class="tr_data">
                             <td>{{ $inventory->client_name }}</td>
                             <td>{{ $inventory->start_date }}</td>
                             <td>{{ $inventory->end_date }}</td>
@@ -100,6 +111,29 @@
     <script>
         $('.status').change(function () {
             $(this).parent().submit();
+        });
+        $('#completed').click(function () {
+            $('.tr_data').each(function () {
+                if ($(this).data('status') === 'completed') {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+        $('#in_progress').click(function () {
+            $('.tr_data').each(function () {
+                if ($(this).data('status') === 'in_progress') {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+        $('#all').click(function () {
+            $('.tr_data').each(function () {
+                $(this).show();
+            });
         });
     </script>
 @endsection

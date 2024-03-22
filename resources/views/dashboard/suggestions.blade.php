@@ -19,41 +19,67 @@
                 les suggestions</a>
         @endif
         @if(count($livret->suggestions) > 0)
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Titre</th>
-                    <th scope="col">Message</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($livret->suggestions as $suggestion)
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                     <tr>
-                        <td>{{ $suggestion->nom }}</td>
-                        <td>{{ $suggestion->email }}</td>
-                        <td>{{ $suggestion->title }}</td>
-                        <td>{{ $suggestion->message }}</td>
-                        <td>
-                            @if($suggestion->status == 'pending')
-                                <span class="badge badge-warning">En attente</span>
-                            @elseif($suggestion->status == 'accepted')
-                                <span class="badge badge-success">Accepté</span>
-                            @else
-                                <span class="badge badge-danger">Refusé</span>
-                            @endif
-                        </td>
-                        {{--<td>
-                            <a href="{{ route('dashboard.suggestion.delete', $suggestion->id) }}"
-                               class="btn btn-danger">Supprimer</a>
-                        </td>--}}
+                        <th scope="col">Nom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($livret->suggestions as $suggestion)
+                        <tr>
+                            <td>{{ $suggestion->name }}</td>
+                            <td>{{ $suggestion->email }}</td>
+                            <td>{{ $suggestion->title }}</td>
+                            <td>{{ $suggestion->message }}</td>
+                            <td>
+                                <form action="{{route('dashboard.suggestion.status')}}" method="post">
+                                    @csrf
+                                    @method('POST')
+                                    <select name="status_suggest" id="status_suggest"
+                                            class="form-control status_suggest">
+                                        <option
+                                            value="pending" {{ $suggestion->status == 'pending' ? 'selected' : '' }}>En
+                                            attente
+                                        </option>
+                                        <option
+                                            value="accepted" {{ $suggestion->status == 'accepted' ? 'selected' : '' }}>
+                                            Accepté
+                                        </option>
+                                        <option
+                                            value="refused" {{ $suggestion->status == 'refused' ? 'selected' : '' }}>
+                                            Refusé
+                                        </option>
+                                    </select>
+                                    @error('status_suggest')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    <input type="hidden" name="suggestion_id" value="{{ $suggestion->id }}">
+                                </form>
+                            </td>
+                            {{--<td>
+                                <a href="{{ route('dashboard.suggestion.delete', $suggestion->id) }}"
+                                   class="btn btn-danger">Supprimer</a>
+                            </td>--}}
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         @endif
     </div>
+@endsection
+@section('footer_script')
+    <script>
+        $('.status_suggest').change(function () {
+            console.log('fagafga')
+            $(this).parent().submit();
+        });
+    </script>
 @endsection

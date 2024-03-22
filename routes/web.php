@@ -105,4 +105,5 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     /* Suggestions */
     Route::get('suggestions', [App\Http\Controllers\DashboardController::class, 'suggestions'])->name('dashboard.suggestions');
     Route::get('suggestion/enable/{id}', [App\Http\Controllers\DashboardController::class, 'enableSuggestion'])->name('dashboard.suggestion.enable');
+    Route::post('suggestion/status', [App\Http\Controllers\DashboardController::class, 'statusSuggestion'])->name('dashboard.suggestion.status');
 });

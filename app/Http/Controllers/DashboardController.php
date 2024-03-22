@@ -18,6 +18,7 @@ use App\Models\ModuleUtilsPhone;
 use App\Models\ModuleWifi;
 use App\Models\NearbyPlace;
 use App\Models\PlaceGroup;
+use App\Models\Suggest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use PHPMailer\PHPMailer\Exception;
@@ -564,6 +565,20 @@ class DashboardController extends Controller
         $livret->save();
 
         return redirect()->route('dashboard.suggestions')->with('success', 'La suggestion a été mise à jour avec succès');
+    }
+
+    public function statusSuggestion(Request $request)
+    {
+        /*$request->validate([
+            'status' => 'required|string',
+            'suggestion_id' => 'required|integer',
+        ]);*/
+
+        $suggestion = Suggest::find($request->suggestion_id);
+        $suggestion->status = $request->status_suggest;
+        $suggestion->save();
+
+        return redirect()->route('dashboard.suggestions')->with('success', 'Le status de la suggestion a été mis à jour avec succès');
     }
 
 }

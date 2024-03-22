@@ -58,15 +58,17 @@
                                 </form>
                             </td>
                             <td>
-                                @if(count(json_decode($inventory->attachment_names)) > 0)
-                                    @foreach(json_decode($inventory->attachment_names) as $attachment)
-                                        <a href="{{ asset($attachment) }}" target="_blank">
-                                            {{ str_replace('assets/uploads/inventory_attachments/', '', $attachment) }}
-                                        </a>
-                                        <br>
-                                    @endforeach
-                                @else
-                                    Aucune pièce jointe
+                                @if($inventory->attachment_names)
+                                    @if(count(json_decode($inventory->attachment_names)) > 0)
+                                        @foreach(json_decode($inventory->attachment_names) as $attachment)
+                                            <a href="{{ asset($attachment) }}" target="_blank">
+                                                {{ str_replace('assets/uploads/inventory_attachments/', '', $attachment) }}
+                                            </a>
+                                            <br>
+                                        @endforeach
+                                    @else
+                                        Aucune pièce jointe
+                                    @endif
                                 @endif
                             </td>
                             <td>

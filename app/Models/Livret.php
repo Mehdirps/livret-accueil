@@ -73,7 +73,7 @@ class Livret extends Model
         return $this->hasMany(Inventory::class);
     }
 
-    public function suggest()
+    public function suggestions()
     {
         return $this->hasMany(Suggest::class);
     }

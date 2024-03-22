@@ -68,4 +68,9 @@ class Livret extends Model
         return $this->hasMany(NearbyPlace::class);
     }
 
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
+
 }

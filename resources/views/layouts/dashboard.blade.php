@@ -70,7 +70,7 @@
                 <li>
                     <a href="{{route('dashboard.suggestions')}}"
                        class="nav-link text-white {{ Route::currentRouteNamed('dashboard.suggestions') ? 'active' : '' }}">
-                        <i class="bi bi-file"></i> Mes suggestions
+                        <i class="bi bi-file-earmark-bar-graph"></i> Mes suggestions
                     </a>
                 </li>
                 <li>

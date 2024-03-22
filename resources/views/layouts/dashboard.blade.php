@@ -57,7 +57,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{route('dashboard.stats')}}" class="nav-link text-white">
+                    <a href="{{route('dashboard.stats')}}" class="nav-link text-white {{ Route::currentRouteNamed('dashboard.stats') ? 'active' : '' }}">
                         <i class="bi bi-graph-up"></i> Statistiques
                     </a>
                 </li>

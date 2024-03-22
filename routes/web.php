@@ -24,6 +24,9 @@ Route::get('/cgu', function () {
 
 Route::get('/livret/{slug}/{id}', [App\Http\Controllers\LivretController::class, 'show'])->name('livret.show');
 
+/* Suggestions */
+Route::post('/suggestions', [App\Http\Controllers\SuggestionController::class, 'store'])->name('suggestion.store');
+
 /* Authentification */
 Route::prefix('auth')->group(function () {
     Route::post('login', [App\Http\Controllers\AuthController::class, 'doLogin'])->name('home.login');

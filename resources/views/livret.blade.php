@@ -100,6 +100,16 @@
                 <p class="lead">{!! nl2br(e($livret->description)) !!}</p>
             </div>
         </div>
+        @if(session('success_suggest'))
+            <div class="alert alert-success mt-4" role="alert">
+                {{ session('success_suggest') }}
+            </div>
+        @endif
+        @if(session('error_suggest'))
+            <div class="alert alert-danger mt-4" role="alert">
+                {{ session('error_suggest') }}
+            </div>
+        @endif
         <div class="row">
             @if($livret->wifi)
                 <div class="col-lg-4 col-md-4 col-sm-6">
@@ -172,7 +182,7 @@
                     <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#placesGroupsModal">
                         <div class="card text-center w-100">
                             <i class="bi bi-geo-alt-fill"></i>
-                           Lieux à proximité
+                            Lieux à proximité
                         </div>
                     </button>
                 </div>
@@ -185,6 +195,15 @@
     </div>
 </main>
 <footer class="container mb-5">
+    @if($livret->suggest)
+        <div class="row">
+            <button type="button" class="btn btn-primary col-3 mx-auto mb-5" data-bs-toggle="modal"
+                    data-bs-target="#suggestionModal">
+                Envoyé une suggestion
+            </button>
+        </div>
+        @include('inc.add_suggestions_modal')
+    @endif
     <div class="row socials">
         @if($livret->establishment_website)
             <div class="col-md-2">

@@ -14,7 +14,7 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::where('role', 'user')->paginate(1);;
+        $users = User::where('role', 'user')->paginate(15);
 
         return view('admin.users', [
             'users' => $users
@@ -41,7 +41,7 @@ class AdminController extends Controller
                     ->orWhere('phone', 'like', '%' . $search . '%')
                     ->orWhere('address', 'like', '%' . $search . '%');
             })
-            ->paginate(1);
+            ->paginate(15);
         return view('admin.users', [
             'users' => $users
         ]);

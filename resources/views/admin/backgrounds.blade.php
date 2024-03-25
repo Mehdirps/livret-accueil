@@ -38,10 +38,8 @@
                         <div class="row">
                             @foreach($chunk as $background)
                                 <div class="card col-md-4 backgroup_card">
-                                    <a href="{{route('dashboard.background.update',$background->id)}}">
                                         <img src="{{asset($background->path)}}" alt="{{$background->name}}"
                                              class="img-fluid w-100 h-100">
-                                    </a>
                                 </div>
                             @endforeach
                         </div>

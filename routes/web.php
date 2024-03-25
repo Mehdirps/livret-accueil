@@ -107,3 +107,8 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('suggestion/enable/{id}', [App\Http\Controllers\DashboardController::class, 'enableSuggestion'])->name('dashboard.suggestion.enable');
     Route::post('suggestion/status', [App\Http\Controllers\DashboardController::class, 'statusSuggestion'])->name('dashboard.suggestion.status');
 });
+
+/* Admin */
+Route::prefix('admin')->middleware('auth.admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+});

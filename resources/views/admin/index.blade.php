@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('admin_title', 'Tableau de bord')
+
 @section('admin_content')
     <div class="container">
         <div class="row">

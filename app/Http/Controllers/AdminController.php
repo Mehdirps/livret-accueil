@@ -61,7 +61,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
         ]);
 
         $background = new BackgroundGroup();

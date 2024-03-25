@@ -121,4 +121,5 @@ Route::prefix('admin')->middleware('auth.admin')->group(function () {
     Route::get('backgrounds', [App\Http\Controllers\AdminController::class, 'backgrounds'])->name('admin.backgrounds.index');
     Route::post('background_groups', [App\Http\Controllers\AdminController::class, 'addBackgroundGroup'])->name('admin.background_groups.add');
     Route::get('background_groups/{id}', [App\Http\Controllers\AdminController::class, 'deleteBackgroundGroup'])->name('admin.background_groups.delete');
+    Route::post('backgrounds', [App\Http\Controllers\AdminController::class, 'addBackground'])->name('admin.backgrounds.add');
 });

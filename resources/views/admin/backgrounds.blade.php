@@ -4,10 +4,16 @@
 
 @section('admin_content')
     <h1>Listes des fonds d'écran</h1>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGroupModal">
-        Ajouter un groupe de fond d'écran
-    </button>
+    <div class="row">
+        <button type="button" class="btn btn-primary col-md-4" data-bs-toggle="modal" data-bs-target="#addGroupModal">
+            Ajouter un groupe de fond d'écran
+        </button>
+        <button type="button" class="btn btn-secondary col-md-4" data-bs-toggle="modal" data-bs-target="#addBackgroundModal">
+            Ajouter un fond d'écran
+        </button>
+    </div>
     @include('admin.partials.add_background_group_modal')
+    @include('admin.partials.add_background_modal')
     <hr>
     <div class="row">
         @foreach($background_group as $group)
@@ -31,12 +37,12 @@
                     @foreach($group->backgrounds->chunk(3) as $chunk)
                         <div class="row">
                             @foreach($chunk as $background)
-                                    <div class="card col-md-4 backgroup_card">
-                                        <a href="{{route('dashboard.background.update',$background->id)}}">
-                                            <img src="{{asset($background->path)}}" alt="{{$background->name}}"
-                                                 class="img-fluid w-100 h-100">
-                                        </a>
-                                    </div>
+                                <div class="card col-md-4 backgroup_card">
+                                    <a href="{{route('dashboard.background.update',$background->id)}}">
+                                        <img src="{{asset($background->path)}}" alt="{{$background->name}}"
+                                             class="img-fluid w-100 h-100">
+                                    </a>
+                                </div>
                             @endforeach
                         </div>
                     @endforeach

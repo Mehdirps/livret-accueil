@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Background;
 use App\Models\BackgroundGroup;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -95,5 +96,28 @@ class AdminController extends Controller
         $backgroundGroup->delete();
 
         return redirect()->back()->with('success', 'Background supprimé');
+    }
+
+    public function addBackground(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'background_group_id' => 'required',
+            'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $backgroundGroup = BackgroundGroup::find($request->background_group_id);
+
+        $background = $request->file('file');
+        $backgroundName = time() . '.' . $background->extension();
+        $background->move(public_path('assets/backgrounds/' . str_replace(' ', '_', strtolower($backgroundGroup->name))), $backgroundName);
+
+        $background = new Background();
+        $background->name = $request->name;
+        $background->path = 'assets/backgrounds/' . str_replace(' ', '_', strtolower($backgroundGroup->name)) . '/' . $backgroundName;
+        $background->backgrounds_group_id = $request->background_group_id;
+        $background->save();
+
+        return redirect()->back()->with('success', 'Fond d\'écran ajouté');
     }
 }

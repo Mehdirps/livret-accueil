@@ -21,4 +21,13 @@ class AdminController extends Controller
         ]);
 
     }
+
+    public function enableUser($id)
+    {
+        $user = User::find($id);
+        $user->active = !$user->active;
+        $user->save();
+
+        return redirect()->back()->with('success', $user->active ? 'Utilisateur activé' : 'Utilisateur désactivé');
+    }
 }

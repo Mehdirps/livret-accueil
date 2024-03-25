@@ -18,6 +18,7 @@
                 <th>Civilité</th>
                 <th>Date de naissance</th>
                 <th>Créé le</th>
+                <th>Actif</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -35,14 +36,18 @@
                     <td>{{$user->civility}}</td>
                     <td>{{$user->birth_date}}</td>
                     <td>{{$user->created_at->format('d/m/Y H:i')}}</td>
-                    {{--<td>
-                        <a href="{{route('admin.users.edit', $user->id)}}" class="btn btn-primary">Modifier</a>
-                        <form action="{{route('admin.users.destroy', $user->id)}}" method="post" class="d-inline">
+                    <td>{{$user->active ? 'Oui' : 'Non'}}</td>
+                    <td>
+                        <form action="{{route('admin.user.enable', $user->id)}}" method="post" class="d-inline">
                             @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                            @method('get')
+                           @if($user->active)
+                                <button type="submit" class="btn btn-danger">Désactiver</button>
+                            @else
+                                <button type="submit" class="btn btn-success">Activer</button>
+                            @endif
                         </form>
-                    </td>--}}
+                    </td>
                 </tr>
             @endforeach
             </tbody>

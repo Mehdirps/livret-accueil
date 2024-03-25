@@ -26,8 +26,13 @@ class AuthController extends Controller
             }
 
             if (!$user->email_verified_at) {
-                /* Auth::logout();*/
+                Auth::logout();
                 return redirect()->route('home')->with('error', 'Veuillez vérifier votre adresse e-mail avant d\'accéder à votre espace, vérifier dans votre boite e-mail ou dans les spams.');
+            }
+
+            if(!$user->active){
+                Auth::logout();
+                return redirect()->route('home')->with('error', 'Votre compte a été désactivé, veuillez contacter l\'administrateur.');
             }
 
             if ($user->first_login) {

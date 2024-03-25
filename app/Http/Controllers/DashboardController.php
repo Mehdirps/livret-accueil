@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -63,7 +64,12 @@ class DashboardController extends Controller
 
     public function updateUser(UpdateUserRequest $request)
     {
-        $user = auth()->user();
+        if ($request->admin_update) {
+            $user = User::find($request->admin_update);
+        } else {
+            $user = auth()->user();
+        }
+
         $user->civility = $request->civility;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -88,7 +94,11 @@ class DashboardController extends Controller
 
         $user->save();
 
-        return redirect()->route('dashboard.profile')->with('success', 'Vos informations ont été mise à jour avec succès');
+        if ($request->admin_update) {
+            return redirect()->route('admin.users.index')->with('success', 'Utilisateur mis à jour avec succès');
+        } else {
+            return redirect()->route('dashboard.profile')->with('success', 'Vos informations ont été mise à jour avec succès');
+        }
     }
 
     public function updatePassword(Request $request)

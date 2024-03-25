@@ -48,9 +48,17 @@
                             @endif
                         </form>
                     </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal_{{$user->id}}">
+                            Modifier
+                        </button>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+        @foreach($users as $user)
+            @include('admin.partials.update_user_modal')
+        @endforeach
     </div>
 @endsection

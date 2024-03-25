@@ -44,7 +44,12 @@
                     <a href="{{route('admin.users.index')}}"
                        class="nav-link text-white {{ Route::currentRouteNamed('admin.users.index') ? 'active' : '' }}"
                        aria-current="page">
-                        <i class="bi bi-speedometer2"></i> Les utilisateurs
+                        <i class="bi bi-people"></i> Les utilisateurs
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link text-white" href="{{route('dashboard.logout')}}">
+                        <i class="bi bi-box-arrow-right"></i> Déconnexion
                     </a>
                 </li>
                 {{--<li class="nav-item">

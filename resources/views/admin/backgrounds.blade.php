@@ -24,7 +24,7 @@
                         @csrf
                         @method('get')
                         <input type="hidden" name="group_id" value="{{$group->id}}">
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                     </form>
                 </div>
             </div>
@@ -40,6 +40,12 @@
                                 <div class="card col-md-4 backgroup_card">
                                         <img src="{{asset($background->path)}}" alt="{{$background->name}}"
                                              class="img-fluid w-100 h-100">
+                                    <form action="{{route('admin.backgrounds.delete', $background->id)}}" method="get">
+                                        @csrf
+                                        @method('get')
+                                        <input type="hidden" name="background_id" value="{{$background->id}}">
+                                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                    </form>
                                 </div>
                             @endforeach
                         </div>

@@ -120,4 +120,16 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Fond d\'écran ajouté');
     }
+
+    public function deleteBackground($id)
+    {
+        $background = Background::find($id);
+        $file_path = public_path($background->path);
+        if (file_exists($file_path)) {
+            unlink($file_path);
+        }
+        $background->delete();
+
+        return redirect()->back()->with('success', 'Fond d\'écran supprimé');
+    }
 }

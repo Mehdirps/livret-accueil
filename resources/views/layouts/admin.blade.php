@@ -48,6 +48,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('admin.backgrounds.index')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('admin.backgrounds.index') ? 'active' : '' }}"
+                       aria-current="page">
+                        <i class="bi bi-image"></i> Les fonds d'écran
+                    </a>
+                </li>
+                <li>
                     <a class="nav-link text-white" href="{{route('dashboard.logout')}}">
                         <i class="bi bi-box-arrow-right"></i> Déconnexion
                     </a>

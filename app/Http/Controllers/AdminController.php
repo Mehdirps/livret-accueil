@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BackgroundGroup;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -44,6 +45,15 @@ class AdminController extends Controller
             ->paginate(15);
         return view('admin.users', [
             'users' => $users
+        ]);
+    }
+
+    public function backgrounds()
+    {
+        $background_group = BackgroundGroup::all();
+
+        return view('admin.backgrounds',[
+            'background_group' => $background_group
         ]);
     }
 }

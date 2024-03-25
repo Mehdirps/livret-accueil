@@ -14,6 +14,12 @@
             <div class="col-md-2">
                 <div class="card">
                     <div class="btn btn-primary btn_group" data-id="{{$group->id}}">{{$group->name}}</div>
+                    <form action="{{route('admin.background_groups.delete', $group->id)}}" method="get">
+                        @csrf
+                        @method('get')
+                        <input type="hidden" name="group_id" value="{{$group->id}}">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
                 </div>
             </div>
         @endforeach

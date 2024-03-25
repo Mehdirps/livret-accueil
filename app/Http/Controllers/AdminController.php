@@ -72,4 +72,21 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Background ajouté');
     }
+
+    public function deleteBackgroundGroup($id)
+    {
+        $backgroundGroup = BackgroundGroup::find($id);
+
+        foreach ($backgroundGroup->backgrounds as $background) {
+            $file_path = public_path($background->path);
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
+            $background->delete();
+        }
+
+        $background->delete();
+
+        return redirect()->back()->with('success', 'Background supprimé');
+    }
 }

@@ -115,4 +115,5 @@ Route::prefix('admin')->middleware('auth.admin')->group(function () {
     /* Users */
     Route::get('users', [App\Http\Controllers\AdminController::class, 'users'])->name('admin.users.index');
     Route::get('users/enable/{id}', [App\Http\Controllers\AdminController::class, 'enableUser'])->name('admin.user.enable');
+    Route::get('/admin/user/search', [App\Http\Controllers\AdminController::class, 'searchUsers'])->name('admin.user.searchUsers');
 });

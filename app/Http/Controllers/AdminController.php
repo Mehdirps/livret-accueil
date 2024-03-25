@@ -85,7 +85,7 @@ class AdminController extends Controller
             $background->delete();
         }
 
-        $background->delete();
+        $backgroundGroup->delete();
 
         return redirect()->back()->with('success', 'Background supprimé');
     }

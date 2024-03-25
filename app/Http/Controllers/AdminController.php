@@ -56,4 +56,20 @@ class AdminController extends Controller
             'background_group' => $background_group
         ]);
     }
+
+    public function addBackgroundGroup(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $background = new BackgroundGroup();
+        $background->name = $request->name;
+        $background->description = $request->description;
+
+        $background->save();
+
+        return redirect()->back()->with('success', 'Background ajouté');
+    }
 }

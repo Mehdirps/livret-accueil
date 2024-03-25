@@ -4,6 +4,11 @@
 
 @section('admin_content')
     <h1>Listes des fonds d'écran</h1>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGroupModal">
+        Ajouter un groupe de fond d'écran
+    </button>
+    @include('admin.partials.add_background_group_modal')
+    <hr>
     <div class="row">
         @foreach($background_group as $group)
             <div class="col-md-2">

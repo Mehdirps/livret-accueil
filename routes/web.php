@@ -111,4 +111,5 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
 /* Admin */
 Route::prefix('admin')->middleware('auth.admin')->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+    Route::get('users', [App\Http\Controllers\AdminController::class, 'users'])->name('admin.users.index');
 });

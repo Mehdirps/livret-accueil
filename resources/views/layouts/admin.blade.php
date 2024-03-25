@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('dashboard_title') - Admin</title>
+    <title>@yield('admin_title') - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -34,68 +34,28 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="{{route('dashboard.index')}}"
-                       class="nav-link text-white {{ Route::currentRouteNamed('dashboard.index') ? 'active' : '' }}"
+                    <a href="{{route('admin.index')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('admin.index') ? 'active' : '' }}"
                        aria-current="page">
                         <i class="bi bi-speedometer2"></i> Tableau de bord
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-book"></i> Mon livret d'accueil
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{route('dashboard.edit_livret')}}">Editer</a></li>
-                        <li><a class="dropdown-item" href="{{route('dashboard.background')}}">Changer le fond</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item"
-                               href="{{route('livret.show',[\Illuminate\Support\Facades\Auth::user()->livret->slug,\Illuminate\Support\Facades\Auth::user()->livret->id])}}">Voir</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="{{route('dashboard.stats')}}" class="nav-link text-white {{ Route::currentRouteNamed('dashboard.stats') ? 'active' : '' }}">
-                        <i class="bi bi-graph-up"></i> Statistiques
+                <li class="nav-item">
+                    <a href="{{route('admin.users.index')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('admin.users.index') ? 'active' : '' }}"
+                       aria-current="page">
+                        <i class="bi bi-speedometer2"></i> Les utilisateurs
                     </a>
                 </li>
-                <li>
-                    <a href="{{route('dashboard.inventories')}}"
-                       class="nav-link text-white {{ Route::currentRouteNamed('dashboard.inventories') ? 'active' : '' }}">
-                        <i class="bi bi-journal-text"></i> Etats de lieux
+                {{--<li class="nav-item">
+                    <a href="{{route('admin.livrets.index')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('admin.livrets.index') ? 'active' : '' }}"
+                       aria-current="page">
+                        <i class="bi bi-speedometer2"></i> Les livrets
                     </a>
-                </li>
-                <li>
-                    <a href="{{route('dashboard.suggestions')}}"
-                       class="nav-link text-white {{ Route::currentRouteNamed('dashboard.suggestions') ? 'active' : '' }}">
-                        <i class="bi bi-file-earmark-bar-graph"></i> Mes suggestions
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('dashboard.profile')}}"
-                       class="nav-link text-white {{ Route::currentRouteNamed('dashboard.profile') ? 'active' : '' }}">
-                        <i class="bi bi-person"></i> Mon profil
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link text-white" href="{{route('dashboard.logout')}}">
-                        <i class="bi bi-box-arrow-right"></i> Déconnexion
-                    </a>
-                </li>
+                </li>--}}
             </ul>
             <hr>
-            <ul>
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#contactModal">
-                    Nous contacter
-                </button>
-            </ul>
-            <ul>
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#shareModal">
-                    Partager
-                </button>
-            </ul>
         </div>
     </div>
     <div class="col-md-9 col-10">

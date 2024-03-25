@@ -103,7 +103,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'background_group_id' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'file' => 'required|image|mimes:jpeg,png,jpg',
         ]);
 
         $backgroundGroup = BackgroundGroup::find($request->background_group_id);

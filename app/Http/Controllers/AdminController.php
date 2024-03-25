@@ -61,7 +61,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'nullable',
+            'description' => 'required',
         ]);
 
         $background = new BackgroundGroup();
@@ -69,6 +69,13 @@ class AdminController extends Controller
         $background->description = $request->description;
 
         $background->save();
+
+        $directoryName = str_replace(' ', '_', strtolower($request->name));
+        $directoryPath = public_path('assets/backgrounds/' . $directoryName);
+
+        if (!file_exists($directoryPath)) {
+            mkdir($directoryPath, 0755, true);
+        }
 
         return redirect()->back()->with('success', 'Background ajouté');
     }

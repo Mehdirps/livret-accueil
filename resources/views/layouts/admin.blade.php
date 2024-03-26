@@ -55,6 +55,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('admin.livrets.index')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('admin.livrets.index') ? 'active' : '' }}"
+                       aria-current="page">
+                        <i class="bi bi-book"></i> Les livrets
+                    </a>
+                </li>
+                <li>
                     <a class="nav-link text-white" href="{{route('dashboard.logout')}}">
                         <i class="bi bi-box-arrow-right"></i> Déconnexion
                     </a>

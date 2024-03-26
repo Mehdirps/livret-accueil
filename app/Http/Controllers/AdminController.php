@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Background;
 use App\Models\BackgroundGroup;
+use App\Models\Livret;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -131,5 +132,14 @@ class AdminController extends Controller
         $background->delete();
 
         return redirect()->back()->with('success', 'Fond d\'écran supprimé');
+    }
+
+    public function livrets()
+    {
+        $livrets = Livret::all();
+
+        return view('admin.livrets',[
+            'livrets' => $livrets
+        ]);
     }
 }

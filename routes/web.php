@@ -126,4 +126,5 @@ Route::prefix('admin')->middleware('auth.admin')->group(function () {
 
     /* Livrets */
     Route::get('livrets', [App\Http\Controllers\AdminController::class, 'livrets'])->name('admin.livrets.index');
+    Route::get('livret/search', [App\Http\Controllers\AdminController::class, 'searchLivrets'])->name('admin.livret.searchLivrets');
 });

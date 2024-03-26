@@ -7,6 +7,14 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center">Les livrets</h1>
+                <form action="{{route('admin.livret.searchLivrets')}}" method="GET">
+                    @csrf
+                    @method('GET')
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Rechercher un livret" aria-label="Rechercher un livret" aria-describedby="button-addon2" name="search">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Rechercher</button>
+                    </div>
+                </form>
                {{-- <a href="{{route('admin.livrets.create')}}" class="btn btn-primary">Ajouter un livret</a>--}}
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -14,6 +22,10 @@
                         <tr>
                             <th>Titre</th>
                             <th>Description</th>
+                            <th>Nom de l'établissement</th>
+                            <th>Adresse de l'établissement</th>
+                            <th>Téléphone de l'établissement</th>
+                            <th>Email de l'établissement</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -22,6 +34,9 @@
                             <tr>
                                 <td>{{$livret->livret_name}}</td>
                                 <td>{{$livret->description}}</td>
+                                <td>{{$livret->establishment_name}}</td>
+                                <td>{{$livret->establishment_address}}</td>
+                                <td>{{$livret->establishment_phone}}</td>
                                 <td>
                                     <a class="btn btn-primary" href="{{route('livret.show',[$livret->slug, $livret->id])}}"> <i class="bi bi-eye"></i></a>
                                     <button type="button" class="btn btn-warning" data-toggle="modal"

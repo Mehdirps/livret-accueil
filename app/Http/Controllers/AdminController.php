@@ -54,7 +54,7 @@ class AdminController extends Controller
     {
         $background_group = BackgroundGroup::all();
 
-        return view('admin.backgrounds',[
+        return view('admin.backgrounds', [
             'background_group' => $background_group
         ]);
     }
@@ -136,9 +136,24 @@ class AdminController extends Controller
 
     public function livrets()
     {
-        $livrets = Livret::all();
+        $livrets = Livret::paginate(15);
 
-        return view('admin.livrets',[
+        return view('admin.livrets', [
+            'livrets' => $livrets
+        ]);
+    }
+
+    public function searchLivrets(Request $request)
+    {
+        $search = $request->get('search');
+
+        $livrets = Livret::where('livret_name', 'like', '%' . $search . '%')
+            ->orWhere('establishment_name', 'like', '%' . $search . '%')
+            ->orWhere('establishment_address', 'like', '%' . $search . '%')
+            ->orWhere('establishment_phone', 'like', '%' . $search . '%')
+            ->paginate(15);
+
+        return view('admin.livrets', [
             'livrets' => $livrets
         ]);
     }

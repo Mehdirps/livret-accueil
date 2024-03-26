@@ -41,6 +41,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    @include('inc.pagination', ['paginator' => $livrets])
                     @foreach($livrets as $livret)
                         @include('admin.partials.update_livret_modal')
                     @endforeach

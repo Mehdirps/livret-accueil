@@ -190,5 +190,6 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Mettre à jour mon livret d'accueil</button>
+        </div>
     </form>
 </div>

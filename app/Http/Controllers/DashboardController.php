@@ -122,7 +122,11 @@ class DashboardController extends Controller
 
     public function updateLivret(LivretRequest $request)
     {
-        $livret = Livret::where('user_id', auth()->id())->first();
+        if ($request->livret_id) {
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = Livret::where('user_id', auth()->id())->first();
+        }
 
         $livret->livret_name = $request->livret_name;
         $livret->slug = \Str::slug($request->livret_name);
@@ -156,8 +160,11 @@ class DashboardController extends Controller
         }
 
         $livret->save();
-
-        return redirect()->route('dashboard.profile')->with('success', 'Votre livret a été mis à jour avec succès');
+        if ($request->livret_id) {
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre livret a été mis à jour avec succès');
+        } else {
+            return redirect()->route('dashboard.profile')->with('success', 'Votre livret a été mis à jour avec succès');
+        }
     }
 
     public function background()

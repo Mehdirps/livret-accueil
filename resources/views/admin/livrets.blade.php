@@ -39,6 +39,7 @@
                                     <td>{{$livret->establishment_name}}</td>
                                     <td>{{$livret->establishment_address}}</td>
                                     <td>{{$livret->establishment_phone}}</td>
+                                    <td>{{$livret->establishment_email}}</td>
                                     <td>
                                         <a class="btn btn-primary"
                                            href="{{route('livret.show',[$livret->slug, $livret->id])}}"> <i

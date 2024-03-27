@@ -21,7 +21,26 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Wifi</h3>
+                            <hr>
+                            <h3 class="display-4">Wifi</h3>
+                            <h4>Ajouter un wifi</h4>
+                            <form id="wifiForm" action="{{route('dashboard.module.wifi')}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <div class="mb-3">
+                                    <label for="wifiName" class="form-label">Nom du WiFi</label>
+                                    <input type="text" class="form-control" id="wifiName" name="wifiName"
+                                           value="{{ old('wifiName')}}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="wifiPassword" class="form-label">Mot de passe du WiFi</label>
+                                    <input type="text" class="form-control" id="wifiPassword" name="wifiPassword"
+                                           value="{{ old('wifiPassword') }}" required>
+                                </div>
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <button type="submit" class="btn btn-primary" id="saveWifi">Sauvegarder</button>
+                            </form>
                             @if(!$livret->wifi->isEmpty())
                                 <table class="table table-striped">
                                     <thead>
@@ -52,7 +71,28 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <h3>Digicode</h3>
+                            <hr>
+                            <h3 class="display-4">Digicode</h3>
+                            <h4>Ajouter un digicode</h4>
+                            <form id="wifiForm" action="{{route('dashboard.module.digicode')}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           value="{{ old('name') }}"
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="code" class="form-label">Code</label>
+                                    <input type="text" class="form-control" id="code" name="code"
+                                           value="{{ old('code')}}"
+                                           required>
+                                </div>
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <button type="submit" class="btn btn-primary" id="saveDigicode">Sauvegarder</button>
+                            </form>
                             @if(!$livret->digicode->isEmpty())
                                 <table class="table table-striped">
                                     <thead>
@@ -85,7 +125,21 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Groupes de lieux</h3>
+                            <hr>
+                            <h3 class="display-4">Groupes de lieux</h3>
+                            <h4>Ajouter un groupe de lieux</h4>
+                            <form action="{{route('dashboard.module.places_groups')}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <div class="mb-3">
+                                    <label for="groupName" class="form-label">Nom du groupe</label>
+                                    <input type="text" class="form-control" id="groupName" name="groupName"
+                                           value="{{ old('groupName')}}" required>
+                                </div>
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <button type="submit" class="btn btn-primary">Ajouter un groupe</button>
+                            </form>
                             @if(!$livret->placeGroups->isEmpty())
                                 <table class="table table-striped">
                                     <thead>
@@ -99,8 +153,9 @@
                                         <tr>
                                             <td>{{ $group->name }}</td>
                                             <td>
-                                                <form action="{{route('dashboard.module.places_groups.delete', $group->id)}}"
-                                                      method="post" class="d-inline">
+                                                <form
+                                                    action="{{route('dashboard.module.places_groups.delete', $group->id)}}"
+                                                    method="post" class="d-inline">
                                                     @csrf
                                                     @method('get')
                                                     <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -113,7 +168,50 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <h3>Autour de moi</h3>
+                            <hr>
+                            <h3 class="display-4">Autour de moi</h3>
+                            <h4>Ajouter un lieu</h4>
+                            <form action="{{route('dashboard.module.nearby_places')}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <div class="mb-3">
+                                    <label for="placeName" class="form-label">Nom du lieu</label>
+                                    <input type="text" class="form-control" id="placeName" name="placeName"
+                                           value="{{ old('placeName')}}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="placeGroup" class="form-label">Groupe</label>
+                                    <select class="form-control" id="placeGroup" name="placeGroup" required>
+                                        <option selected disabled>-- Choisir un groupe --</option>
+                                        @foreach($livret->placeGroups as $group)
+                                            <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="placeAddress" class="form-label">Adresse du lieu</label>
+                                    <input type="text" class="form-control" id="placeAddress" name="placeAddress"
+                                           value="{{ old('placeAddress')}}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="placePhone" class="form-label">Téléphone du lieu</label>
+                                    <input type="text" class="form-control" id="placePhone" name="placePhone"
+                                           value="{{ old('placePhone')}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="travelTime" class="form-label">Temps de trajet</label>
+                                    <input type="text" class="form-control" id="travelTime" name="travelTime"
+                                           value="{{ old('travelTime')}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="placeDescription" class="form-label">Description du lieu</label>
+                                    <textarea class="form-control" id="placeDescription" name="placeDescription"
+                                    >{{ old('placeDescription')}}</textarea>
+                                </div>
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <button type="submit" class="btn btn-primary">Ajouter un lieu</button>
+                            </form>
                             @if(!$livret->nearbyPlaces->isEmpty())
                                 <div class="table-responsive">
 
@@ -157,7 +255,28 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Numéro utiles</h3>
+                            <hr>
+                            <h3 class="display-4">Numéros utiles</h3>
+                            <h4>Ajouter un numéro utile</h4>
+                            <form id="wifiForm" action="{{route('dashboard.module.utils_phone')}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           value="{{ old('name') }}"
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="number" class="form-label">Numéro</label>
+                                    <input type="text" class="form-control" id="number" name="number"
+                                           value="{{ old('number')}}"
+                                           required>
+                                </div>
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <button type="submit" class="btn btn-primary" id="saveDigicode">Sauvegarder</button>
+                            </form>
                             @if(!$livret->utilsPhone->isEmpty())
                                 <table class="table table-striped">
                                     <thead>
@@ -174,8 +293,9 @@
                                             <td>{{$item->number}}</td>
                                             <td>
                                                 <a href="" class="btn btn-primary">Editer</a>
-                                                <form action="{{route('dashboard.module.utils_phone.delete', $item->id)}}"
-                                                      method="post" class="d-inline">
+                                                <form
+                                                    action="{{route('dashboard.module.utils_phone.delete', $item->id)}}"
+                                                    method="post" class="d-inline">
                                                     @csrf
                                                     @method('get')
                                                     <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -188,7 +308,27 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <h3>Infos pratiques</h3>
+                            <hr>
+                            <h3 class="display-4">Infos pratiques</h3>
+                            <h4>Ajouter une info pratique</h4>
+                            <form id="wifiForm" action="{{route('dashboard.module.utils_infos')}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <div class="mb-3">
+                                    <label for="sub_name" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="sub_name" name="sub_name"
+                                           value="{{ old('sub_name') }}"
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="text" class="form-label">Texte</label>
+                                    <textarea class="form-control" id="text" name="text"
+                                              required>{{ old('text') }}</textarea>
+                                </div>
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <button type="submit" class="btn btn-primary" id="saveDigicode">Sauvegarder</button>
+                            </form>
                             @if(!$livret->utilsInfos->isEmpty())
                                 <table class="table table-striped">
                                     <thead>
@@ -205,8 +345,9 @@
                                             <td>{{$item->text}}</td>
                                             <td>
                                                 <a href="" class="btn btn-primary">Editer</a>
-                                                <form action="{{route('dashboard.module.utils_infos.delete', $item->id)}}"
-                                                      method="post" class="d-inline">
+                                                <form
+                                                    action="{{route('dashboard.module.utils_infos.delete', $item->id)}}"
+                                                    method="post" class="d-inline">
                                                     @csrf
                                                     @method('get')
                                                     <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -221,7 +362,27 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Info arrivée</h3>
+                            <hr>
+                            <h3 class="display-4">Info arrivée</h3>
+                            <h4>Ajouter une info d'arrivée</h4>
+                            <form id="wifiForm" action="{{route('dashboard.module.start_info')}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           value="{{ old('name') }}"
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="text" class="form-label">Texte</label>
+                                    <textarea class="form-control" id="text" name="text"
+                                              required>{{ old('text') }}</textarea>
+                                </div>
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <button type="submit" class="btn btn-primary" id="saveDigicode">Sauvegarder</button>
+                            </form>
                             @if(!$livret->startInfos->isEmpty())
                                 <table class="table table-striped">
                                     <thead>
@@ -238,8 +399,9 @@
                                             <td>{{$item->text}}</td>
                                             <td>
                                                 <a href="" class="btn btn-primary">Editer</a>
-                                                <form action="{{route('dashboard.module.start_info.delete', $item->id)}}"
-                                                      method="post" class="d-inline">
+                                                <form
+                                                    action="{{route('dashboard.module.start_info.delete', $item->id)}}"
+                                                    method="post" class="d-inline">
                                                     @csrf
                                                     @method('get')
                                                     <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -252,7 +414,27 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <h3>Info départ</h3>
+                            <hr>
+                            <h3 class="display-4">Info départ</h3>
+                            <h4>Ajouter une info de départ</h4>
+                            <form id="wifiForm" action="{{route('dashboard.module.end_info')}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           value="{{ old('name') }}"
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="text" class="form-label">Texte</label>
+                                    <textarea class="form-control" id="text" name="text"
+                                              required>{{ old('text') }}</textarea>
+                                </div>
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
+                                <button type="submit" class="btn btn-primary" id="saveDigicode">Sauvegarder</button>
+                            </form>
                             @if(!$livret->endInfos->isEmpty())
                                 <table class="table table-striped">
                                     <thead>
@@ -285,7 +467,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Mot d'accueil</h3>
+                            <hr>
+                            <h3 class="display-4">Mot d'accueil</h3>
                             <form id="wifiForm" action="{{route('dashboard.module.home_infos')}}" method="post">
                                 @csrf
                                 @method('POST')
@@ -293,12 +476,15 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Titre</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                           value="{{ old('name', $livret->homeInfos ? $livret->homeInfos->name : '') }}" required>
+                                           value="{{ old('name', $livret->homeInfos ? $livret->homeInfos->name : '') }}"
+                                           required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="text" class="form-label">Message</label>
-                                    <textarea class="form-control" id="text" name="text" rows="3" required>{{ old('text', $livret->homeInfos ? $livret->homeInfos->text : '') }}</textarea>
+                                    <textarea class="form-control" id="text" name="text" rows="3"
+                                              required>{{ old('text', $livret->homeInfos ? $livret->homeInfos->text : '') }}</textarea>
                                 </div>
+                                <input type="hidden" name="livret_id" value="{{$livret->id}}">
                                 <button type="submit" class="btn btn-primary" id="saveWifi">Sauvegarder</button>
                             </form>
                         </div>

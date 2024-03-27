@@ -200,13 +200,22 @@ class DashboardController extends Controller
 
     public function addModuleWifi(Request $request)
     {
-        $livret = auth()->user()->livret;
+        if(auth()->user()->role == 'admin'){
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = auth()->user()->livret;
+        }
+
 
         $wifi = new ModuleWifi();
         $wifi->ssid = $request->wifiName;
         $wifi->password = $request->wifiPassword;
         $wifi->livret = $livret->id;
         $wifi->save();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre réseau wifi a été mis à jour avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre réseau wifi a été mis à jour avec succès');
     }
@@ -225,13 +234,21 @@ class DashboardController extends Controller
 
     public function addModuleDigicode(Request $request)
     {
-        $livret = auth()->user()->livret;
+        if(auth()->user()->role == 'admin'){
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = auth()->user()->livret;
+        }
 
         $digicode = new ModuleDigicode();
         $digicode->name = $request->name;
         $digicode->code = $request->code;
         $digicode->livret = $livret->id;
         $digicode->save();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre digicode a été mis à jour avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre digicode a été mis à jour avec succès');
     }
@@ -250,13 +267,21 @@ class DashboardController extends Controller
 
     public function addModuleUtilsPhone(Request $request)
     {
-        $livret = auth()->user()->livret;
+        if(auth()->user()->role == 'admin'){
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = auth()->user()->livret;
+        }
 
         $utilsPhone = new ModuleUtilsPhone();
         $utilsPhone->name = $request->name;
         $utilsPhone->number = $request->number;
         $utilsPhone->livret = $livret->id;
         $utilsPhone->save();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre numéro utile a été mis à jour avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre numéro de téléphone a été mis à jour avec succès');
     }
@@ -275,7 +300,11 @@ class DashboardController extends Controller
 
     public function addModuleUtilsInfos(Request $request)
     {
-        $livret = auth()->user()->livret;
+        if(auth()->user()->role == 'admin'){
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = auth()->user()->livret;
+        }
 
         $utilsInfos = new ModuleUtilsInfos();
         $utilsInfos->name = 'Infos pratiques';
@@ -283,6 +312,10 @@ class DashboardController extends Controller
         $utilsInfos->text = $request->text;
         $utilsInfos->livret = $livret->id;
         $utilsInfos->save();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre info utile a été mis à jour avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information pratique a été mis à jour avec succès');
     }
@@ -301,13 +334,21 @@ class DashboardController extends Controller
 
     public function addModuleStartInfo(Request $request)
     {
-        $livret = auth()->user()->livret;
+        if(auth()->user()->role == 'admin'){
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = auth()->user()->livret;
+        }
 
         $startInfo = new ModuleStartInfos();
         $startInfo->name = $request->name;
         $startInfo->text = $request->text;
         $startInfo->livret = $livret->id;
         $startInfo->save();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre info d\'arrivé a été mis à jour avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information d\'arrivée a été mis à jour avec succès');
     }
@@ -326,13 +367,21 @@ class DashboardController extends Controller
 
     public function addModuleEndInfo(Request $request)
     {
-        $livret = auth()->user()->livret;
+        if(auth()->user()->role == 'admin'){
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = auth()->user()->livret;
+        }
 
         $startInfo = new ModuleEndInfos();
         $startInfo->name = $request->name;
         $startInfo->text = $request->text;
         $startInfo->livret = $livret->id;
         $startInfo->save();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre info de départ a été mis à jour avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information de départ a été mis à jour avec succès');
     }
@@ -351,7 +400,12 @@ class DashboardController extends Controller
 
     public function addModuleHomeInfos(Request $request)
     {
-        $livret = auth()->user()->livret;
+        if(auth()->user()->role == 'admin'){
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = auth()->user()->livret;
+        }
+
         if ($livret->homeInfos) {
             $homeInfos = $livret->homeInfos;
             $homeInfos->name = $request->name;
@@ -363,6 +417,10 @@ class DashboardController extends Controller
             $homeInfos->text = $request->text;
             $homeInfos->livret = $livret->id;
             $homeInfos->save();
+        }
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre message de bienvenue a été mis à jour avec succès');
         }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information de départ a été mis à jour avec succès');
@@ -423,11 +481,20 @@ class DashboardController extends Controller
 
     public function addModulePlacesGroups(Request $request)
     {
-        $livret = auth()->user()->livret;
+        if(auth()->user()->role == 'admin'){
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = auth()->user()->livret;
+        }
+
         $placeGroup = new PlaceGroup();
         $placeGroup->name = $request->groupName;
         $placeGroup->livret_id = $livret->id;
         $placeGroup->save();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre groupe de lieu a été ajouté avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre groupe a été ajouté avec succès');
     }
@@ -446,7 +513,12 @@ class DashboardController extends Controller
 
     public function addModuleNearbyPlaces(Request $request)
     {
-        $livret = auth()->user()->livret;
+        if(auth()->user()->role == 'admin'){
+            $livret = Livret::find($request->livret_id);
+        } else {
+            $livret = auth()->user()->livret;
+        }
+
         $nearbyPlace = new NearbyPlace();
         $nearbyPlace->name = $request->placeName;
         $nearbyPlace->address = $request->placeAddress;
@@ -456,6 +528,10 @@ class DashboardController extends Controller
         $nearbyPlace->travel_time = $request->travelTime;
         $nearbyPlace->livret_id = $livret->id;
         $nearbyPlace->save();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre lieu a été ajouté avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre groupe a été ajouté avec succès');
     }

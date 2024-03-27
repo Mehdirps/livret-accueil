@@ -48,10 +48,12 @@
                                                 data-target="#updateLivretModal_{{$livret->id}}">
                                             <i class="bi bi-pen"></i>
                                         </button>
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                                data-target="#statsModal_{{$livret->id}}"><i class="bi bi-bar-chart-line-fill"></i>
+                                        </button>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal"
                                                 data-target="#moduleLivretModal_{{$livret->id}}">Voir les modules
                                         </button>
-
                                     </td>
                                 </tr>
                             @endforeach
@@ -66,6 +68,7 @@
                     @foreach($livrets as $livret)
                         @include('admin.partials.update_livret_modal')
                         @include('admin.partials.module_livret_modal')
+                        @include('admin.partials.livret_stats_modal')
                     @endforeach
                 </div>
             </div>

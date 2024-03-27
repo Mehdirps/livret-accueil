@@ -216,6 +216,10 @@ class DashboardController extends Controller
         $wifi = ModuleWifi::find($id);
         $wifi->delete();
 
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre réseau wifi a été supprimé avec succès');
+        }
+
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre réseau wifi a été supprimé avec succès');
     }
 
@@ -237,6 +241,10 @@ class DashboardController extends Controller
         $digicode = ModuleDigicode::find($id);
         $digicode->delete();
 
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre digicode a été supprimé avec succès');
+        }
+
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre digicode a été supprimé avec succès');
     }
 
@@ -257,6 +265,10 @@ class DashboardController extends Controller
     {
         $utilsPhone = ModuleUtilsPhone::find($id);
         $utilsPhone->delete();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre numéro utile a été supprimé avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre numéro de téléphone a été supprimé avec succès');
     }
@@ -280,6 +292,10 @@ class DashboardController extends Controller
         $utilsInfos = ModuleUtilsInfos::find($id);
         $utilsInfos->delete();
 
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre info utile a été supprimé avec succès');
+        }
+
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information pratique a été supprimé avec succès');
     }
 
@@ -301,6 +317,10 @@ class DashboardController extends Controller
         $startInfo = ModuleStartInfos::find($id);
         $startInfo->delete();
 
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre info d\'arrivé a été supprimé avec succès');
+        }
+
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information d\'arrivée a été supprimé avec succès');
     }
 
@@ -321,6 +341,10 @@ class DashboardController extends Controller
     {
         $startInfo = ModuleEndInfos::find($id);
         $startInfo->delete();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre info de départ a été supprimé avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre de départ information a été supprimé avec succès');
     }
@@ -344,13 +368,17 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information de départ a été mis à jour avec succès');
     }
 
-    public function deleteModuleHomeInfos($id)
+ /*   public function deleteModuleHomeInfos($id)
     {
         $homeInfos = ModuleHome::find($id);
         $homeInfos->delete();
 
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre réseau wifi a été supprimé avec succès');
+        }
+
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre de départ information a été supprimé avec succès');
-    }
+    }*/
 
     public function stats(Request $request)
     {
@@ -409,6 +437,10 @@ class DashboardController extends Controller
         $placeGroup = PlaceGroup::find($id);
         $placeGroup->delete();
 
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre groupe de lieu a été supprimé avec succès');
+        }
+
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre groupe a été supprimé avec succès');
     }
 
@@ -432,6 +464,10 @@ class DashboardController extends Controller
     {
         $nearbyPlace = NearbyPlace::find($id);
         $nearbyPlace->delete();
+
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.livrets.index')->with('success', 'Votre lieu a été supprimé avec succès');
+        }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre groupe a été supprimé avec succès');
     }

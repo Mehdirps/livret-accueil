@@ -6,25 +6,37 @@
     <h1>Les produits</h1>
     <hr>
     <h2>Ajouter un produit</h2>
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.products.add')}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="form-group">
             <label for="name">Nom</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
+        @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="form-group">
             <label for="price">Prix</label>
-            <input type="text" class="form-control" id="price" name="price" required>
+            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
         </div>
+        @error('price')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="form-group">
-            <label for="url">Description</label>
+            <label for="url">Lien du produit (sur maplaque-nfc.fr)</label>
             <input class="form-control" type="url" name="url" id="url" placeholder="Url du produit" required>
         </div>
+        @error('url')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="form-group">
-            <label for="description">Image</label>
+            <label for="image">Image</label>
             <input class="form-control" type="file" name="image" id="image" required>
         </div>
+        @error('image')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <br>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
@@ -48,17 +60,10 @@
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->price }}</td>
-                        <td><img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                        <td><img src="{{ asset($product->image) }}" alt="{{ $product->name }}"
                                  style="width: 100px;"></td>
                         <td>{{ $product->url }}</td>
                         <td>
-                            {{-- <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-warning">Modifier</a>
-                             <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
-                                   style="display: inline;">
-                                 @csrf
-                                 @method('DELETE')
-                                 <button type="submit" class="btn btn-danger">Supprimer</button>
-                             </form>--}}
                         </td>
                     </tr>
                 @endforeach

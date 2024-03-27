@@ -131,4 +131,5 @@ Route::prefix('admin')->middleware('auth.admin')->group(function () {
 
     /* Products */
     Route::get('products', [App\Http\Controllers\AdminController::class, 'products'])->name('admin.products.index');
+    Route::post('products', [App\Http\Controllers\AdminController::class, 'addProduct'])->name('admin.products.add');
 });

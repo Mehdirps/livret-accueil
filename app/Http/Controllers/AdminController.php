@@ -167,4 +167,28 @@ class AdminController extends Controller
             'products' => $products
         ]);
     }
+
+    public function addProduct(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'url' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp',
+        ]);
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->url = $request->url;
+        $product->price = $request->price;
+
+        $productImage = $request->file('image');
+        $productImageName = time() . '.' . $productImage->extension();
+        $productImage->move(public_path('assets/uploads/products'), $productImageName);
+
+        $product->image = 'assets/uploads/products/' . $productImageName;
+        $product->save();
+
+        return redirect()->back()->with('success', 'Produit ajouté');
+    }
 }

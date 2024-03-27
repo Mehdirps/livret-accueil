@@ -47,14 +47,10 @@
                                                 data-target="#updateLivretModal_{{$livret->id}}">
                                             <i class="bi bi-pen"></i>
                                         </button>
-                                        {{-- <a href="{{route('admin.livrets.edit', $livret->id)}}"
-                                            class="btn btn-warning">Modifier</a>
-                                         <form action="{{route('admin.livrets.destroy', $livret->id)}}" method="post"
-                                               class="d-inline">
-                                             @csrf
-                                             @method('DELETE')
-                                             <button type="submit" class="btn btn-danger">Supprimer</button>
-                                         </form>--}}
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                data-target="#moduleLivretModal_{{$livret->id}}">Voir les modules
+                                        </button>
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -68,6 +64,7 @@
                     @include('inc.pagination', ['paginator' => $livrets])
                     @foreach($livrets as $livret)
                         @include('admin.partials.update_livret_modal')
+                        @include('admin.partials.module_livret_modal')
                     @endforeach
                 </div>
             </div>

@@ -163,7 +163,7 @@ class AdminController extends Controller
     {
         $products = Product::paginate(15);
 
-        return view('admin.products',[
+        return view('admin.products', [
             'products' => $products
         ]);
     }
@@ -190,5 +190,19 @@ class AdminController extends Controller
         $product->save();
 
         return redirect()->back()->with('success', 'Produit ajouté');
+    }
+
+    public function deleteProduct($id)
+    {
+        $product = Product::find($id);
+
+        $file_path = public_path($product->image);
+
+        if (file_exists($file_path)) {
+            unlink($file_path);
+        }
+        $product->delete();
+
+        return redirect()->back()->with('success', 'Produit supprimé');
     }
 }

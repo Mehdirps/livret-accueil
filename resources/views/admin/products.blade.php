@@ -64,6 +64,12 @@
                                  style="width: 100px;"></td>
                         <td>{{ $product->url }}</td>
                         <td>
+                            <form action="{{ route('admin.products.delete', $product->id) }}" method="get"
+                                  style="display: inline;">
+                                @csrf
+                                @method('get')
+                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

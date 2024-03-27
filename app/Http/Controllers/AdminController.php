@@ -237,4 +237,18 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Produit modifié');
     }
+
+    public function searchProducts(Request $request)
+    {
+        $search = $request->search;
+
+        $products = Product::where('name', 'like', '%' . $search . '%')
+            ->orWhere('price', 'like', '%' . $search . '%')
+            ->orWhere('url', 'like', '%' . $search . '%')
+            ->paginate(1);
+
+        return view('admin.products', [
+            'products' => $products
+        ]);
+    }
 }

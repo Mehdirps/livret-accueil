@@ -5,6 +5,15 @@
 @section('admin_content')
     <h1>Les produits</h1>
     <hr>
+    <form action="{{ route('admin.products.searchProducts') }}" method="post">
+        @csrf
+        @method('post')
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Rechercher un produit" name="search" required>
+            <button class="btn btn-outline-secondary" type="submit">Rechercher</button>
+        </div>
+    </form>
+    <br>
     <h2>Ajouter un produit</h2>
     <form action="{{route('admin.products.add')}}" method="POST" enctype="multipart/form-data">
         @csrf

@@ -106,6 +106,7 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('suggestions', [App\Http\Controllers\DashboardController::class, 'suggestions'])->name('dashboard.suggestions');
     Route::get('suggestion/enable/{id}', [App\Http\Controllers\DashboardController::class, 'enableSuggestion'])->name('dashboard.suggestion.enable');
     Route::post('suggestion/status', [App\Http\Controllers\DashboardController::class, 'statusSuggestion'])->name('dashboard.suggestion.status');
+
 });
 
 /* Admin */
@@ -127,4 +128,7 @@ Route::prefix('admin')->middleware('auth.admin')->group(function () {
     /* Livrets */
     Route::get('livrets', [App\Http\Controllers\AdminController::class, 'livrets'])->name('admin.livrets.index');
     Route::get('livret/search', [App\Http\Controllers\AdminController::class, 'searchLivrets'])->name('admin.livret.searchLivrets');
+
+    /* Products */
+    Route::get('products', [App\Http\Controllers\AdminController::class, 'products'])->name('admin.products.index');
 });

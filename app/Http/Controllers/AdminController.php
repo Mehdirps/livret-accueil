@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Background;
 use App\Models\BackgroundGroup;
 use App\Models\Livret;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -155,6 +156,15 @@ class AdminController extends Controller
 
         return view('admin.livrets', [
             'livrets' => $livrets
+        ]);
+    }
+
+    public function products()
+    {
+        $products = Product::paginate(15);
+
+        return view('admin.products',[
+            'products' => $products
         ]);
     }
 }

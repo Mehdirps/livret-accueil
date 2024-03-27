@@ -205,4 +205,36 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Produit supprimé');
     }
+
+    public function updateProduct(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'url' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,webp',
+        ]);
+
+        $product = Product::find($request->id);
+        $product->name = $request->name;
+        $product->url = $request->url;
+        $product->price = $request->price;
+
+        if ($request->hasFile('image')) {
+            $file_path = public_path($product->image);
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
+
+            $productImage = $request->file('image');
+            $productImageName = time() . '.' . $productImage->extension();
+            $productImage->move(public_path('assets/uploads/products'), $productImageName);
+
+            $product->image = 'assets/uploads/products/' . $productImageName;
+        }
+
+        $product->save();
+
+        return redirect()->back()->with('success', 'Produit modifié');
+    }
 }

@@ -64,6 +64,9 @@
                                  style="width: 100px;"></td>
                         <td>{{ $product->url }}</td>
                         <td>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#updateProductModal_{{$product->id}}"><i class="bi bi-pencil"></i>
+                            </button>
                             <form action="{{ route('admin.products.delete', $product->id) }}" method="get"
                                   style="display: inline;">
                                 @csrf
@@ -81,5 +84,8 @@
             </tbody>
         </table>
         @include('inc.pagination', ['paginator' => $products])
+        @foreach($products as $product)
+            @include('admin.partials.update_product_modal')
+        @endforeach
     </div>
 @endsection

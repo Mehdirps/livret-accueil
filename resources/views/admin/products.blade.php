@@ -3,7 +3,7 @@
 @section('admin_title', 'Les produits')
 
 @section('admin_content')
-    <h1>Les produits</h1>
+    <h1>Boutique</h1>
     <hr>
     <form action="{{ route('admin.products.searchProducts') }}" method="post">
         @csrf
@@ -14,6 +14,67 @@
         </div>
     </form>
     <br>
+    <h2>Ajouter une catégorie</h2>
+    <form action="{{route('admin.product_categories.add')}}" method="POST">
+        @csrf
+        @method('POST')
+        <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" required></textarea>
+        </div>
+        @error('description')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <br>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+    <hr>
+    <h3>Listes des catégories</h3>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if(count($categories) > 0)
+                @foreach($categories as $category)
+                    <tr>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->name }}</td>
+                        <td>{{ $category->description }}</td>
+                        <td>
+                           {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#updateCategoryModal_{{$category->id}}"><i class="bi bi-pencil"></i>
+                            </button>
+                            <form action="{{ route('admin.product_categories.delete', $category->id) }}" method="get"
+                                  style="display: inline;">
+                                @csrf
+                                @method('get')
+                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                            </form>--}}
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="4">Aucune catégorie</td>
+                </tr>
+            @endif
+            </tbody>
+        </table>
+    </div>
     <h2>Ajouter un produit</h2>
     <form action="{{route('admin.products.add')}}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -50,6 +111,7 @@
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
     <hr>
+    <h3>Listes des produits</h3>
     <div class="table-responsive">
         <table class="table">
             <thead>

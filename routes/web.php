@@ -135,4 +135,7 @@ Route::prefix('admin')->middleware('auth.admin')->group(function () {
     Route::get('products/{id}', [App\Http\Controllers\AdminController::class, 'deleteProduct'])->name('admin.products.delete');
     Route::post('products/update', [App\Http\Controllers\AdminController::class, 'updateProduct'])->name('admin.products.update');
     Route::post('products/search', [App\Http\Controllers\AdminController::class, 'searchProducts'])->name('admin.products.searchProducts');
+
+    /* Product Catégories */
+    Route::post('product_categories', [App\Http\Controllers\AdminController::class, 'addProductCategory'])->name('admin.product_categories.add');
 });

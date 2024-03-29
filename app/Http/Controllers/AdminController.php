@@ -6,8 +6,10 @@ use App\Models\Background;
 use App\Models\BackgroundGroup;
 use App\Models\Livret;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Psy\Util\Str;
 
 class AdminController extends Controller
 {
@@ -162,9 +164,11 @@ class AdminController extends Controller
     public function products()
     {
         $products = Product::paginate(15);
+        $categories = ProductCategory::all();
 
         return view('admin.products', [
-            'products' => $products
+            'products' => $products,
+            'categories' => $categories
         ]);
     }
 
@@ -250,5 +254,21 @@ class AdminController extends Controller
         return view('admin.products', [
             'products' => $products
         ]);
+    }
+
+    public function addProductCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $productCategory = new ProductCategory();
+        $productCategory->name = $request->name;
+        $productCategory->slug = \Illuminate\Support\Str::slug($request->name);
+        $productCategory->description = $request->description;
+        $productCategory->save();
+
+        return redirect()->back()->with('success', 'Catégorie de produit ajoutée');
     }
 }

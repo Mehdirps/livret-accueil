@@ -18,6 +18,8 @@ use App\Models\ModuleUtilsPhone;
 use App\Models\ModuleWifi;
 use App\Models\NearbyPlace;
 use App\Models\PlaceGroup;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Suggest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -709,5 +711,27 @@ class DashboardController extends Controller
 
         return redirect()->route('dashboard.suggestions')->with('success', 'Le status de la suggestion a été mis à jour avec succès');
     }
+
+    public function products()
+    {
+        $categories = ProductCategory::all();
+        $products = Product::paginate(15);
+
+        return view('dashboard.shop', [
+            'categories' => $categories,
+            'products' => $products,
+        ]);
+    }
+
+  /*  public function searchProducts(Request $request)
+    {
+        $categories = ProductCategory::all();
+        $products = Product::where('name', 'like', '%' . $request->search . '%')->paginate(15);
+
+        return view('dashboard.shop', [
+            'categories' => $categories,
+            'products' => $products,
+        ]);
+    }*/
 
 }

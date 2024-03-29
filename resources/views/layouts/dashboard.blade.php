@@ -80,6 +80,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('dashboard.products')}}"
+                       class="nav-link text-white {{ Route::currentRouteNamed('dashboard.products') ? 'active' : '' }}">
+                        <i class="bi bi-shop"></i> Notre boutique
+                    </a>
+                </li>
+                <li>
                     <a class="nav-link text-white" href="{{route('dashboard.logout')}}">
                         <i class="bi bi-box-arrow-right"></i> Déconnexion
                     </a>

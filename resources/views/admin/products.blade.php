@@ -55,7 +55,7 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
                         <td>
-                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                      data-bs-target="#updateCategoryModal_{{$category->id}}"><i class="bi bi-pencil"></i>
                              </button>
                              <form action="{{ route('admin.product_categories.delete', $category->id) }}" method="get"
@@ -63,7 +63,7 @@
                                  @csrf
                                  @method('get')
                                  <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                             </form>--}}
+                             </form>
                         </td>
                     </tr>
                 @endforeach
@@ -168,6 +168,9 @@
         @include('inc.pagination', ['paginator' => $products])
         @foreach($products as $product)
             @include('admin.partials.update_product_modal')
+        @endforeach
+        @foreach($categories as $category)
+            @include('admin.partials.update_product_category_modal')
         @endforeach
     </div>
 @endsection

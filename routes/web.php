@@ -138,4 +138,6 @@ Route::prefix('admin')->middleware('auth.admin')->group(function () {
 
     /* Product Catégories */
     Route::post('product_categories', [App\Http\Controllers\AdminController::class, 'addProductCategory'])->name('admin.product_categories.add');
+    Route::get('product_categories/{id}', [App\Http\Controllers\AdminController::class, 'deleteProductCategory'])->name('admin.product_categories.delete');
+    Route::post('product_categories/update', [App\Http\Controllers\AdminController::class, 'updateProductCategory'])->name('admin.product_categories.update');
 });

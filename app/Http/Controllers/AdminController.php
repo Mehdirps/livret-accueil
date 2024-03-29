@@ -275,4 +275,40 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Catégorie de produit ajoutée');
     }
+
+    public function deleteProductCategory($id)
+    {
+        $productCategory = ProductCategory::find($id);
+
+        if ($productCategory->products->count() > 0) {
+            foreach ($productCategory->products as $product) {
+                $file_path = public_path($product->image);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+                $product->delete();
+            }
+        }
+
+        $productCategory->delete();
+
+        return redirect()->back()->with('success', 'Catégorie de produit supprimée');
+    }
+
+    public function updateProductCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'id' => 'required',
+        ]);
+
+        $productCategory = ProductCategory::find($request->id);
+        $productCategory->name = $request->name;
+        $productCategory->slug = \Illuminate\Support\Str::slug($request->name);
+        $productCategory->description = $request->description;
+        $productCategory->save();
+
+        return redirect()->back()->with('success', 'Catégorie de produit modifiée');
+    }
 }

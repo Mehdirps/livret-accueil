@@ -1,4 +1,5 @@
-<div class="modal fade" id="updateProductModal_{{$product->id}}" tabindex="-1" aria-labelledby="updateProductModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateProductModal_{{$product->id}}" tabindex="-1" aria-labelledby="updateProductModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,21 +12,24 @@
                     @method('POST')
                     <div class="form-group">
                         <label for="name">Nom</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}" required>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}"
+                               required>
                     </div>
                     @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <div class="form-group">
                         <label for="price">Prix</label>
-                        <input type="number" class="form-control" id="price" name="price" step="0.01" value="{{ $product->price }}" required>
+                        <input type="number" class="form-control" id="price" name="price" step="0.01"
+                               value="{{ $product->price }}" required>
                     </div>
                     @error('price')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <div class="form-group">
                         <label for="url">Lien du produit (sur maplaque-nfc.fr)</label>
-                        <input class="form-control" type="url" name="url" id="url" placeholder="Url du produit" value="{{ $product->url }}" required>
+                        <input class="form-control" type="url" name="url" id="url" placeholder="Url du produit"
+                               value="{{ $product->url }}" required>
                     </div>
                     @error('url')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -40,6 +44,16 @@
                     @error('image')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
+                    {{-- Fait le select avec les cat et met active celle en cours --}}
+                    <div class="form-group">
+                        <label for="category">Catégorie</label>
+                        <select class="form-control" name="category" id="category" required>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}"
+                                        @if($category->id == $product->category_id) selected @endif>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <br>
                     <input type="hidden" name="id" value="{{ $product->id }}">
                     <button type="submit" class="btn btn-primary">Mettre à jour</button>

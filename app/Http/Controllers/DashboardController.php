@@ -680,7 +680,6 @@ class DashboardController extends Controller
 
     public function searchInventories(Request $request)
     {
-        // Valider les données du formulaire
         $request->validate([
             'client_name' => 'nullable|string',
             'start_date' => 'nullable|date',
@@ -688,13 +687,11 @@ class DashboardController extends Controller
             'status' => 'nullable|string|in:in_progress,completed',
         ]);
 
-        // Récupérer les données du formulaire
         $client_name = $request->input('client_name');
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
         $status = $request->input('status');
 
-        // Effectuer une recherche dans la base de données
         $query = Inventory::query();
 
         if ($client_name) {
@@ -715,7 +712,6 @@ class DashboardController extends Controller
 
         $inventories = $query->paginate(15);
 
-        // Renvoyer une vue avec les résultats de la recherche
         return view('dashboard.inventories', [
             'livret' => auth()->user()->livret,
             'inventories' => $inventories,
@@ -754,6 +750,53 @@ class DashboardController extends Controller
         $suggestion->save();
 
         return redirect()->route('dashboard.suggestions')->with('success', 'Le status de la suggestion a été mis à jour avec succès');
+    }
+
+    public function searchSuggestions(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'nullable|string',
+            'email' => 'nullable|email',
+            'title' => 'nullable|string',
+            'message' => 'nullable|string',
+            'status' => 'nullable|string|in:all,pending,accepted,refused',
+        ]);
+
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $title = $request->input('title');
+        $message = $request->input('message');
+        $status = $request->input('status');
+
+        $query = Suggest::query();
+
+        if ($name) {
+            $query->where('name', 'like', '%' . $name . '%');
+        }
+
+        if ($email) {
+            $query->where('email', 'like', '%' . $email . '%');
+        }
+
+        if ($title) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        if ($message) {
+            $query->where('message', 'like', '%' . $message . '%');
+        }
+
+        if ($status && $status != 'all') {
+            $query->where('status', $status);
+        }
+
+        $suggestions = $query->paginate(15);
+
+        return view('dashboard.suggestions', [
+            'livret' => auth()->user()->livret,
+            'suggestions' => $suggestions,
+        ]);
     }
 
     public function products()

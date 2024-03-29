@@ -5,6 +5,33 @@
 @section('dashboard_content')
     <div class="container">
         <h2 class="mb-4">Etats de lieux</h2>
+        {{-- Fait un formilaire de recherche --}}
+        <form action="{{ route('dashboard.inventories.search') }}" method="post">
+            @csrf
+            @method('POST')
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" name="client_name" class="form-control" placeholder="Nom du client">
+                </div>
+                <div class="col-md-4">
+                    <input type="date" name="start_date" class="form-control" placeholder="Date d'arrivée">
+                </div>
+                <div class="col-md-4">
+                    <input type="date" name="end_date" class="form-control" placeholder="Date de départ">
+                </div>
+                <div class="col-md-4">
+                    <select name="status" id="status" class="form-control">
+                        <option value="">Status</option>
+                        <option value="in_progress">En cours</option>
+                        <option value="completed">Terminé</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </div>
+            </div>
+        </form>
+        <hr>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventoryModal">
             Ajouter un état des lieux
         </button>

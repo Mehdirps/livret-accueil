@@ -678,6 +678,50 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.inventories')->with('success', 'L\'état des lieux a été supprimé avec succès');
     }
 
+    public function searchInventories(Request $request)
+    {
+        // Valider les données du formulaire
+        $request->validate([
+            'client_name' => 'nullable|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+            'status' => 'nullable|string|in:in_progress,completed',
+        ]);
+
+        // Récupérer les données du formulaire
+        $client_name = $request->input('client_name');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $status = $request->input('status');
+
+        // Effectuer une recherche dans la base de données
+        $query = Inventory::query();
+
+        if ($client_name) {
+            $query->where('client_name', 'like', '%' . $client_name . '%');
+        }
+
+        if ($start_date) {
+            $query->where('start_date', '>=', $start_date);
+        }
+
+        if ($end_date) {
+            $query->where('end_date', '<=', $end_date);
+        }
+
+        if ($status) {
+            $query->where('status', $status);
+        }
+
+        $inventories = $query->paginate(15);
+
+        // Renvoyer une vue avec les résultats de la recherche
+        return view('dashboard.inventories', [
+            'livret' => auth()->user()->livret,
+            'inventories' => $inventories,
+        ]);
+    }
+
     public function suggestions()
     {
         $livret = auth()->user()->livret;

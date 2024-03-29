@@ -179,12 +179,14 @@ class AdminController extends Controller
             'price' => 'required',
             'url' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,webp',
+            'category' => 'required',
         ]);
 
         $product = new Product();
         $product->name = $request->name;
         $product->url = $request->url;
         $product->price = $request->price;
+        $product->category_id = $request->category;
 
         $productImage = $request->file('image');
         $productImageName = time() . '.' . $productImage->extension();
@@ -217,12 +219,14 @@ class AdminController extends Controller
             'price' => 'required',
             'url' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,webp',
+            'category' => 'required',
         ]);
 
         $product = Product::find($request->id);
         $product->name = $request->name;
         $product->url = $request->url;
         $product->price = $request->price;
+        $product->category_id = $request->category;
 
         if ($request->hasFile('image')) {
             $file_path = public_path($product->image);

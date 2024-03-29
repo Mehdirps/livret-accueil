@@ -55,15 +55,15 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
                         <td>
-                           {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#updateCategoryModal_{{$category->id}}"><i class="bi bi-pencil"></i>
-                            </button>
-                            <form action="{{ route('admin.product_categories.delete', $category->id) }}" method="get"
-                                  style="display: inline;">
-                                @csrf
-                                @method('get')
-                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                            </form>--}}
+                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                     data-bs-target="#updateCategoryModal_{{$category->id}}"><i class="bi bi-pencil"></i>
+                             </button>
+                             <form action="{{ route('admin.product_categories.delete', $category->id) }}" method="get"
+                                   style="display: inline;">
+                                 @csrf
+                                 @method('get')
+                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                             </form>--}}
                         </td>
                     </tr>
                 @endforeach
@@ -107,6 +107,15 @@
         @error('image')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+        <div class="form-group">
+            <label for="category">Catégorie</label>
+            <select class="form-control" name="category" id="category" required>
+                <option selected disabled>Choisir une catégorie</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
@@ -121,6 +130,7 @@
                 <th>Prix</th>
                 <th>Image</th>
                 <th>Url</th>
+                <th>Catégorie</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -134,6 +144,7 @@
                         <td><img src="{{ asset($product->image) }}" alt="{{ $product->name }}"
                                  style="width: 100px;"></td>
                         <td>{{ $product->url }}</td>
+                        <td>{{ $product->category->name }}</td>
                         <td>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#updateProductModal_{{$product->id}}"><i class="bi bi-pencil"></i>

@@ -116,6 +116,9 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('products', [App\Http\Controllers\DashboardController::class, 'products'])->name('dashboard.products');
 /*    Route::get('products/search', [App\Http\Controllers\DashboardController::class, 'searchProducts'])->name('dashboard.products.search');*/
 
+    /* Text design */
+    Route::post('/update-text-design', [App\Http\Controllers\DashboardController::class, 'updateTextDesign'])->name('dashboard.update-text-design');
+
 });
 
 /* Admin */

@@ -878,4 +878,16 @@ class DashboardController extends Controller
         return response()->json(['status' => 'success']);
     }
 
+    public function updateTextDesign(Request $request)
+    {
+        $livret = auth()->user()->livret;
+
+        $livret->font = $request->input('fontFamily');
+        $livret->text_color = $request->input('fontColor');
+
+        $livret->save();
+
+        return redirect()->route('dashboard.edit_livret')->with('success', 'Les paramètres de design ont été mis à jour avec succès');
+    }
+
 }

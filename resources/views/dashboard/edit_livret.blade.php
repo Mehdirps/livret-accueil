@@ -45,6 +45,10 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modulesOrderModal">
             Changer l'ordre des modules
         </button>
+        <hr>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#textDesignModal">
+            Changer le design des textes
+        </button>
         <div class="col-md-3 col-sm-4">
             <div class="card text-center">
                 <i class="bi bi-wifi"></i>
@@ -131,6 +135,7 @@
     @include('dashboard.partials.module_nearby_places')
     @include('dashboard.partials.module_places_groups')
     @include('dashboard.partials.module_order')
+    @include('dashboard.partials.change_text_design_modal')
 @endsection
 
 @section('footer_script')

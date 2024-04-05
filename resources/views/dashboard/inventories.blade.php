@@ -35,6 +35,11 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventoryModal">
             Ajouter un état des lieux
         </button>
+        <hr>
+        <p>Exporter en PDF les états des lieux affichées dans le tableau</p>
+        <button type="button" class="btn btn-secondary" id="exportPdf">
+            Exporter en PDF
+        </button>
         @if(session('success'))
             <div class="alert alert-success mt-3">
                 {{ session('success') }}
@@ -160,6 +165,39 @@
         $('#all').click(function () {
             $('.tr_data').each(function () {
                 $(this).show();
+            });
+        });
+
+        $('#exportPdf').on('click', function() {
+            var data = [];
+            $('table tbody tr:visible').each(function() {
+                var row = $(this);
+                data.push({
+                    client_name: row.find('td:eq(0)').text(),
+                    start_date: row.find('td:eq(1)').text(),
+                    end_date: row.find('td:eq(2)').text(),
+                    client_comment: row.find('td:eq(3)').text(),
+                    status: row.find('td:eq(4) select').val(),
+                    attachments: row.find('td:eq(5) a').map(function() {
+                        return $(this).attr('href');
+                    }).get()
+                });
+            });
+
+            $.ajax({
+                url: '/dashboard/inventories/export',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    data: data
+                }
+            }).done(function(response) {
+                if (response.status === 'success') {
+                    var link = document.createElement('a');
+                    link.href = 'data:application/pdf;base64,' + response.pdf_base64;
+                    link.download = 'inventories.pdf';
+                    link.click();
+                }
             });
         });
     </script>

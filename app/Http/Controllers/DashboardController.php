@@ -904,4 +904,18 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function exportInventories(Request $request)
+    {
+        $data = $request->input('data');
+
+        $pdf = PDF::loadView('dashboard.partials.inventories_pdf', ['data' => $data]);
+
+        $output = $pdf->output();
+
+        return response()->json([
+            'status' => 'success',
+            'pdf_base64' => base64_encode($output)
+        ]);
+    }
+
 }

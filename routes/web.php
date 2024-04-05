@@ -102,7 +102,6 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::post('/inventories/update', [App\Http\Controllers\DashboardController::class, 'statusInventory'])->name('dashboard.inventories.status');
     Route::delete('/inventories/{id}', [App\Http\Controllers\DashboardController::class, 'deleteInventory'])->name('dashboard.inventories.delete');
     Route::post('dashboard.inventories.search', [App\Http\Controllers\DashboardController::class, 'searchInventories'])->name('dashboard.inventories.search');
-    Route::post('inventories/export', [App\Http\Controllers\DashboardController::class, 'exportInventories'])->name('dashboard.inventories.export');
 
     /* Contact */
     Route::post('module/contact', [App\Http\Controllers\DashboardController::class, 'contactSupport'])->name('dashboard.contact');
@@ -112,7 +111,6 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::get('suggestion/enable/{id}', [App\Http\Controllers\DashboardController::class, 'enableSuggestion'])->name('dashboard.suggestion.enable');
     Route::post('suggestion/status', [App\Http\Controllers\DashboardController::class, 'statusSuggestion'])->name('dashboard.suggestion.status');
     Route::post('dashboard.suggestion.search', [App\Http\Controllers\DashboardController::class, 'searchSuggestions'])->name('dashboard.suggestion.search');
-    Route::post('suggestions/export', [App\Http\Controllers\DashboardController::class, 'exportSuggestions'])->name('dashboard.suggestions.export');
 
     /* Products */
     Route::get('products', [App\Http\Controllers\DashboardController::class, 'products'])->name('dashboard.products');
@@ -120,6 +118,9 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
 
     /* Text design */
     Route::post('/update-text-design', [App\Http\Controllers\DashboardController::class, 'updateTextDesign'])->name('dashboard.update-text-design');
+
+    /* PDF Export */
+    Route::post('datas/export', [App\Http\Controllers\DashboardController::class, 'exportDatas'])->name('dashboard.datas.export');
 
 });
 

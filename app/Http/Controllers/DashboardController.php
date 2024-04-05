@@ -890,25 +890,17 @@ class DashboardController extends Controller
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Les paramètres de design ont été mis à jour avec succès');
     }
-    public function exportSuggestions(Request $request)
+    public function exportDatas(Request $request)
     {
         $data = $request->input('data');
 
-        $pdf = PDF::loadView('dashboard.partials.suggestions_pdf', ['data' => $data]);
+        $type = $request->input('type');
 
-        $output = $pdf->output();
-
-        return response()->json([
-            'status' => 'success',
-            'pdf_base64' => base64_encode($output)
-        ]);
-    }
-
-    public function exportInventories(Request $request)
-    {
-        $data = $request->input('data');
-
-        $pdf = PDF::loadView('dashboard.partials.inventories_pdf', ['data' => $data]);
+        if($type == 'suggestions'){
+            $pdf = PDF::loadView('dashboard.partials.suggestions_pdf', ['data' => $data]);
+        }elseif($type == 'inventories'){
+            $pdf = PDF::loadView('dashboard.partials.inventories_pdf', ['data' => $data]);
+        }
 
         $output = $pdf->output();
 

@@ -211,11 +211,12 @@
             });
 
             $.ajax({
-                url: '/dashboard/suggestions/export',
+                url: '/dashboard/datas/export',
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    data: data
+                    data: data,
+                    type: 'suggestions'
                 }
             }).done(function(response) {
                 if (response.status === 'success') {

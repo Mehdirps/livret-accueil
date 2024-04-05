@@ -185,11 +185,12 @@
             });
 
             $.ajax({
-                url: '/dashboard/inventories/export',
+                url: '/dashboard/datas/export',
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    data: data
+                    data: data,
+                    type: 'inventories'
                 }
             }).done(function(response) {
                 if (response.status === 'success') {

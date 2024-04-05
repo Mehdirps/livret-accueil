@@ -202,7 +202,7 @@ class DashboardController extends Controller
 
     public function addModuleWifi(Request $request)
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $livret = Livret::find($request->livret_id);
         } else {
             $livret = auth()->user()->livret;
@@ -215,7 +215,7 @@ class DashboardController extends Controller
         $wifi->livret = $livret->id;
         $wifi->save();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre réseau wifi a été mis à jour avec succès');
         }
 
@@ -227,7 +227,7 @@ class DashboardController extends Controller
         $wifi = ModuleWifi::find($id);
         $wifi->delete();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre réseau wifi a été supprimé avec succès');
         }
 
@@ -236,7 +236,7 @@ class DashboardController extends Controller
 
     public function addModuleDigicode(Request $request)
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $livret = Livret::find($request->livret_id);
         } else {
             $livret = auth()->user()->livret;
@@ -248,7 +248,7 @@ class DashboardController extends Controller
         $digicode->livret = $livret->id;
         $digicode->save();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre digicode a été mis à jour avec succès');
         }
 
@@ -260,7 +260,7 @@ class DashboardController extends Controller
         $digicode = ModuleDigicode::find($id);
         $digicode->delete();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre digicode a été supprimé avec succès');
         }
 
@@ -269,7 +269,7 @@ class DashboardController extends Controller
 
     public function addModuleUtilsPhone(Request $request)
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $livret = Livret::find($request->livret_id);
         } else {
             $livret = auth()->user()->livret;
@@ -281,7 +281,7 @@ class DashboardController extends Controller
         $utilsPhone->livret = $livret->id;
         $utilsPhone->save();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre numéro utile a été mis à jour avec succès');
         }
 
@@ -293,7 +293,7 @@ class DashboardController extends Controller
         $utilsPhone = ModuleUtilsPhone::find($id);
         $utilsPhone->delete();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre numéro utile a été supprimé avec succès');
         }
 
@@ -302,7 +302,7 @@ class DashboardController extends Controller
 
     public function addModuleUtilsInfos(Request $request)
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $livret = Livret::find($request->livret_id);
         } else {
             $livret = auth()->user()->livret;
@@ -315,7 +315,7 @@ class DashboardController extends Controller
         $utilsInfos->livret = $livret->id;
         $utilsInfos->save();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre info utile a été mis à jour avec succès');
         }
 
@@ -327,7 +327,7 @@ class DashboardController extends Controller
         $utilsInfos = ModuleUtilsInfos::find($id);
         $utilsInfos->delete();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre info utile a été supprimé avec succès');
         }
 
@@ -336,7 +336,7 @@ class DashboardController extends Controller
 
     public function addModuleStartInfo(Request $request)
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $livret = Livret::find($request->livret_id);
         } else {
             $livret = auth()->user()->livret;
@@ -348,7 +348,7 @@ class DashboardController extends Controller
         $startInfo->livret = $livret->id;
         $startInfo->save();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre info d\'arrivé a été mis à jour avec succès');
         }
 
@@ -360,7 +360,7 @@ class DashboardController extends Controller
         $startInfo = ModuleStartInfos::find($id);
         $startInfo->delete();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre info d\'arrivé a été supprimé avec succès');
         }
 
@@ -369,7 +369,7 @@ class DashboardController extends Controller
 
     public function addModuleEndInfo(Request $request)
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $livret = Livret::find($request->livret_id);
         } else {
             $livret = auth()->user()->livret;
@@ -381,7 +381,7 @@ class DashboardController extends Controller
         $startInfo->livret = $livret->id;
         $startInfo->save();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre info de départ a été mis à jour avec succès');
         }
 
@@ -393,7 +393,7 @@ class DashboardController extends Controller
         $startInfo = ModuleEndInfos::find($id);
         $startInfo->delete();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre info de départ a été supprimé avec succès');
         }
 
@@ -402,7 +402,7 @@ class DashboardController extends Controller
 
     public function addModuleHomeInfos(Request $request)
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $livret = Livret::find($request->livret_id);
         } else {
             $livret = auth()->user()->livret;
@@ -421,24 +421,24 @@ class DashboardController extends Controller
             $homeInfos->save();
         }
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre message de bienvenue a été mis à jour avec succès');
         }
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Votre information de départ a été mis à jour avec succès');
     }
 
- /*   public function deleteModuleHomeInfos($id)
-    {
-        $homeInfos = ModuleHome::find($id);
-        $homeInfos->delete();
+    /*   public function deleteModuleHomeInfos($id)
+       {
+           $homeInfos = ModuleHome::find($id);
+           $homeInfos->delete();
 
-        if(auth()->user()->role == 'admin'){
-            return redirect()->route('admin.livrets.index')->with('success', 'Votre réseau wifi a été supprimé avec succès');
-        }
+           if(auth()->user()->role == 'admin'){
+               return redirect()->route('admin.livrets.index')->with('success', 'Votre réseau wifi a été supprimé avec succès');
+           }
 
-        return redirect()->route('dashboard.edit_livret')->with('success', 'Votre de départ information a été supprimé avec succès');
-    }*/
+           return redirect()->route('dashboard.edit_livret')->with('success', 'Votre de départ information a été supprimé avec succès');
+       }*/
 
     public function stats(Request $request)
     {
@@ -483,7 +483,7 @@ class DashboardController extends Controller
 
     public function addModulePlacesGroups(Request $request)
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $livret = Livret::find($request->livret_id);
         } else {
             $livret = auth()->user()->livret;
@@ -494,7 +494,7 @@ class DashboardController extends Controller
         $placeGroup->livret_id = $livret->id;
         $placeGroup->save();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre groupe de lieu a été ajouté avec succès');
         }
 
@@ -506,7 +506,7 @@ class DashboardController extends Controller
         $placeGroup = PlaceGroup::find($id);
         $placeGroup->delete();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre groupe de lieu a été supprimé avec succès');
         }
 
@@ -515,7 +515,7 @@ class DashboardController extends Controller
 
     public function addModuleNearbyPlaces(Request $request)
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $livret = Livret::find($request->livret_id);
         } else {
             $livret = auth()->user()->livret;
@@ -531,7 +531,7 @@ class DashboardController extends Controller
         $nearbyPlace->livret_id = $livret->id;
         $nearbyPlace->save();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre lieu a été ajouté avec succès');
         }
 
@@ -543,7 +543,7 @@ class DashboardController extends Controller
         $nearbyPlace = NearbyPlace::find($id);
         $nearbyPlace->delete();
 
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             return redirect()->route('admin.livrets.index')->with('success', 'Votre lieu a été supprimé avec succès');
         }
 
@@ -810,15 +810,72 @@ class DashboardController extends Controller
         ]);
     }
 
-  /*  public function searchProducts(Request $request)
-    {
-        $categories = ProductCategory::all();
-        $products = Product::where('name', 'like', '%' . $request->search . '%')->paginate(15);
+    /*  public function searchProducts(Request $request)
+      {
+          $categories = ProductCategory::all();
+          $products = Product::where('name', 'like', '%' . $request->search . '%')->paginate(15);
 
-        return view('dashboard.shop', [
-            'categories' => $categories,
-            'products' => $products,
-        ]);
-    }*/
+          return view('dashboard.shop', [
+              'categories' => $categories,
+              'products' => $products,
+          ]);
+      }*/
+
+    public function updateOrder(Request $request)
+    {
+        $order = $request->input('order');
+        $livret = auth()->user()->livret;
+
+        foreach ($order as $item) {
+            $index = $item['order'];
+            $moduleName = $item['module'];
+
+            if ($moduleName == 'Wifi') {
+                $modules = $livret->wifi;
+                foreach ($modules as $module) {
+                    $module->order = $index;
+                    $module->save();
+                }
+            } elseif ($moduleName == 'Digicode') {
+                $modules = $livret->digicode;
+                foreach ($modules as $module) {
+                    $module->order = $index;
+                    $module->save();
+                }
+            } elseif ($moduleName == 'Infos de départ') {
+                $modules = $livret->endInfos;
+                foreach ($modules as $module) {
+                    $module->order = $index;
+                    $module->save();
+                }
+            } elseif ($moduleName == 'Numéros utiles') {
+                $modules = $livret->utilsPhone;
+                foreach ($modules as $module) {
+                    $module->order = $index;
+                    $module->save();
+                }
+            } elseif ($moduleName == 'Infos de d\'arrivée') {
+                $modules = $livret->startInfos;
+                foreach ($modules as $module) {
+                    $module->order = $index;
+                    $module->save();
+                }
+            } elseif ($moduleName == 'Infos utiles') {
+                $modules = $livret->utilsInfos;
+                foreach ($modules as $module) {
+                    $module->order = $index;
+                    $module->save();
+                }
+            } elseif ($moduleName == 'Lieux à proximité') {
+                $modules = $livret->nearbyPlaces;
+                foreach ($modules as $module) {
+                    $module->order = $index;
+                    $module->save();
+                }
+            }
+        }
+
+        return response()->json(['status' => 'success']);
+    }
 
 }

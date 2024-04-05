@@ -93,6 +93,9 @@ Route::prefix('dashboard')->middleware('auth.check')->group(function () {
     Route::post('module/nearby_places', [App\Http\Controllers\DashboardController::class, 'addModuleNearbyPlaces'])->name('dashboard.module.nearby_places');
     Route::get('module/nearby_places/{id}', [App\Http\Controllers\DashboardController::class, 'deleteModuleNearbyPlaces'])->name('dashboard.module.nearby_places.delete');
 
+    /* Module order */
+    Route::post('/update-order', [App\Http\Controllers\DashboardController::class, 'updateOrder'])->name('dashboard.update-order');
+
     /* Inventories */
     Route::get('/inventories', [App\Http\Controllers\DashboardController::class, 'inventories'])->name('dashboard.inventories');
     Route::post('/inventories', [App\Http\Controllers\DashboardController::class, 'addInventory'])->name('dashboard.inventories.add');

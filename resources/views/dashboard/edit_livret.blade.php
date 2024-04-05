@@ -42,7 +42,10 @@
         </div>
     @endif
     <div class="row container">
-        <div class="col-md-3">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modulesOrderModal">
+            Changer l'ordre des modules
+        </button>
+        <div class="col-md-3 col-sm-4">
             <div class="card text-center">
                 <i class="bi bi-wifi"></i>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#wifiModal">
@@ -50,7 +53,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-4">
             <div class="card text-center">
                 <i class="bi bi-key"></i>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#digicodeModal">
@@ -58,7 +61,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-4">
             <div class="card text-center">
                 <i class="bi bi-geo-alt"></i>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -68,7 +71,7 @@
             </div>
         </div>
         @if(!$livret->placeGroups->isEmpty())
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-4">
                 <div class="card text-center">
                     <i class="bi bi-geo-alt"></i>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#placesModal">
@@ -77,7 +80,7 @@
                 </div>
             </div>
         @endif
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-4">
             <div class="card text-center">
                 <i class="bi bi-telephone"></i>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phonesModal">
@@ -85,7 +88,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-4">
             <div class="card text-center">
                 <i class="bi bi-info-circle"></i>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#utilsInfosModal">
@@ -93,7 +96,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-4">
             <div class="card text-center">
                 <i class="bi bi-arrow-up-right"></i>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#startInfosModal">
@@ -101,7 +104,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-4">
             <div class="card text-center">
                 <i class="bi bi-arrow-down-left"></i>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#endInfosModal">
@@ -109,7 +112,7 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-4">
             <div class="card text-center">
                 <i class="bi bi-envelope"></i>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#homeInfosModal">
@@ -127,4 +130,38 @@
     @include('dashboard.partials.module_home_infos')
     @include('dashboard.partials.module_nearby_places')
     @include('dashboard.partials.module_places_groups')
+    @include('dashboard.partials.module_order')
+@endsection
+
+@section('footer_script')
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("tbody").sortable({
+                handle: '.move_item',
+                update: function(event, ui) {
+                    var newOrder = [];
+                    $(this).find('tr').each(function(index) {
+                        var moduleName = $(this).find('td:last-child').text().trim();
+                        newOrder.push({order: index, module: moduleName});
+                    });
+                    $.ajax({
+                        url: '/dashboard/update-order',
+                        method: 'POST',
+                        data: {
+                            order: newOrder,
+                            _token: '{{ csrf_token() }}'
+                        }
+                    }).done(function() {
+                        let i = 0;
+                        $(".module_order_tr").each(function(index) {
+                            $(this).find('td:nth-child(2)').text(i);
+                        console.log(i);
+                            i++;
+                        });
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

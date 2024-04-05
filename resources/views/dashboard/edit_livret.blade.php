@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('dashboard_title', 'Changement de fond')
+@section('dashboard_title', 'Editer mon livret')
 
 @section('dashboard_content')
     <style>

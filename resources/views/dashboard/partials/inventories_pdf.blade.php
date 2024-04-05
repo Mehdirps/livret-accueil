@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-<h1>Export des inventaires</h1>
+<h1>Export des états des lieux</h1>
 <table>
     <thead>
     <tr>

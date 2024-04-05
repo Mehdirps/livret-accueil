@@ -66,6 +66,9 @@
             <a href="{{ route('dashboard.suggestion.enable', $livret->id) }}" class="text-white btn btn-danger">Désactiver
                 les suggestions</a>
         @endif
+        <hr>
+        <p>Exporter en PDF les suggestions affichées dans le tableau</p>
+        <button id="exportPdf" class="btn btn-primary">Exporter en PDF</button>
         @if(count($livret->suggestions) > 0)
             <hr>
             <div class="row">
@@ -191,6 +194,36 @@
         $('#all').click(function () {
             $('.tr_data').each(function () {
                 $(this).show();
+            });
+        });
+
+        $('#exportPdf').on('click', function() {
+            var data = [];
+            $('table tbody tr:visible').each(function() {
+                var row = $(this);
+                data.push({
+                    name: row.find('td:eq(0)').text(),
+                    email: row.find('td:eq(1)').text(),
+                    title: row.find('td:eq(2)').text(),
+                    message: row.find('td:eq(3)').text(),
+                    status: row.find('td:eq(4) select').val()
+                });
+            });
+
+            $.ajax({
+                url: '/dashboard/suggestions/export',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    data: data
+                }
+            }).done(function(response) {
+                if (response.status === 'success') {
+                    var link = document.createElement('a');
+                    link.href = 'data:application/pdf;base64,' + response.pdf_base64;
+                    link.download = 'suggestions.pdf';
+                    link.click();
+                }
             });
         });
     </script>

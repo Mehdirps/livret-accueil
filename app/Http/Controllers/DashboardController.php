@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Hash;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Models\User;
+use PDF;
 
 class DashboardController extends Controller
 {
@@ -888,6 +889,19 @@ class DashboardController extends Controller
         $livret->save();
 
         return redirect()->route('dashboard.edit_livret')->with('success', 'Les paramètres de design ont été mis à jour avec succès');
+    }
+    public function exportSuggestions(Request $request)
+    {
+        $data = $request->input('data');
+
+        $pdf = PDF::loadView('dashboard.partials.suggestions_pdf', ['data' => $data]);
+
+        $output = $pdf->output();
+
+        return response()->json([
+            'status' => 'success',
+            'pdf_base64' => base64_encode($output)
+        ]);
     }
 
 }

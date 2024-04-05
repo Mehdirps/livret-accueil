@@ -111,86 +111,99 @@
             </div>
         @endif
         <div class="row">
-            @if($livret->wifi)
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#wifiModal">
-                        <div class="card text-center w-100">
-                            <i class="bi bi-wifi"></i>
-                            Wifi
+            @foreach($livret->wifi->unique('order')->concat($livret->digicode->unique('order'))->concat($livret->endInfos->unique('order'))->concat($livret->utilsPhone->unique('order'))->concat($livret->startInfos->unique('order'))->concat($livret->utilsInfos->unique('order'))->concat($livret->NearbyPlaces->unique('order'))->sortBy('order') as $item)
+                @if($item instanceof App\Models\ModuleWifi)
+                    @if($livret->wifi)
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#wifiModal">
+                                <div class="card text-center w-100">
+                                    <i class="bi bi-wifi"></i>
+                                    Wifi
+                                </div>
+                            </button>
                         </div>
-                    </button>
-                </div>
-                @include('inc.modules_modals.module_wifi')
-            @endif
-            @if(!$livret->digicode->isEmpty())
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#digicodeModal">
-                        <div class="card text-center w-100">
-                            <i class="bi bi-key-fill"></i>
-                            Digicode
+                        @include('inc.modules_modals.module_wifi')
+                    @endif
+                @elseif($item instanceof App\Models\ModuleDigicode)
+                    @if(!$livret->digicode->isEmpty())
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <button type="button" class="btn w-100" data-bs-toggle="modal"
+                                    data-bs-target="#digicodeModal">
+                                <div class="card text-center w-100">
+                                    <i class="bi bi-key-fill"></i>
+                                    Digicode
+                                </div>
+                            </button>
                         </div>
-                    </button>
-                </div>
-                @include('inc.modules_modals.module_digicode')
-            @endif
-            @if(!$livret->startInfos->isEmpty())
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#startInfosModal">
-                        <div class="card text-center w-100">
-                            <i class="bi bi-info-circle-fill"></i>
-                            Infos arrivée
+                        @include('inc.modules_modals.module_digicode')
+                    @endif
+                @elseif($item instanceof App\Models\ModuleEndInfos)
+                    @if(!$livret->endInfos->isEmpty())
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <button type="button" class="btn w-100" data-bs-toggle="modal"
+                                    data-bs-target="#endInfosModal">
+                                <div class="card text-center w-100">
+                                    <i class="bi bi-info-circle-fill"></i>
+                                    Infos départ
+                                </div>
+                            </button>
                         </div>
-                    </button>
-                </div>
-                @include('inc.modules_modals.module_start_infos')
-            @endif
-            @if(!$livret->endInfos->isEmpty())
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#endInfosModal">
-                        <div class="card text-center w-100">
-                            <i class="bi bi-info-circle-fill"></i>
-                            Infos départ
+                        @include('inc.modules_modals.module_end_infos')
+                    @endif
+                @elseif($item instanceof App\Models\ModuleUtilsPhone)
+                    @if(!$livret->utilsPhone->isEmpty())
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <button type="button" class="btn w-100" data-bs-toggle="modal"
+                                    data-bs-target="#utilsPhoneModal">
+                                <div class="card text-center w-100">
+                                    <i class="bi bi-telephone-fill"></i>
+                                    Numéros utile
+                                </div>
+                            </button>
                         </div>
-                    </button>
-                </div>
-                @include('inc.modules_modals.module_end_infos')
-            @endif
-            @if(!$livret->utilsPhone->isEmpty())
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#utilsPhoneModal">
-                        <div class="card text-center w-100">
-                            <i class="bi bi-telephone-fill"></i>
-                            Numéros utile
+                        @include('inc.modules_modals.module_utils_phone')
+                    @endif
+                @elseif($item instanceof App\Models\ModuleStartInfos)
+                    @if(!$livret->startInfos->isEmpty())
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <button type="button" class="btn w-100" data-bs-toggle="modal"
+                                    data-bs-target="#startInfosModal">
+                                <div class="card text-center w-100">
+                                    <i class="bi bi-info-circle-fill"></i>
+                                    Infos arrivée
+                                </div>
+                            </button>
                         </div>
-                    </button>
-                </div>
-                @include('inc.modules_modals.module_utils_phone')
-            @endif
-            @if(!$livret->utilsInfos->isEmpty())
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#utilsInfosModal">
-                        <div class="card text-center w-100">
-                            <i class="bi bi-info-circle-fill"></i>
-                            Infos utiles
+                        @include('inc.modules_modals.module_start_infos')
+                    @endif
+                @elseif($item instanceof \App\Models\ModuleUtilsInfos)
+                    @if(!$livret->utilsInfos->isEmpty())
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <button type="button" class="btn w-100" data-bs-toggle="modal"
+                                    data-bs-target="#utilsInfosModal">
+                                <div class="card text-center w-100">
+                                    <i class="bi bi-info-circle-fill"></i>
+                                    Infos utiles
+                                </div>
+                            </button>
                         </div>
-                    </button>
-                </div>
-                @include('inc.modules_modals.module_utils_infos')
-            @endif
-            @if(!$livret->placeGroups->isEmpty() && !$livret->NearbyPlaces->isEmpty())
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#placesGroupsModal">
-                        <div class="card text-center w-100">
-                            <i class="bi bi-geo-alt-fill"></i>
-                            Lieux à proximité
+                        @include('inc.modules_modals.module_utils_infos')
+                    @endif
+                @elseif($item instanceof App\Models\NearbyPlace)
+                    @if(!$livret->placeGroups->isEmpty() && !$livret->NearbyPlaces->isEmpty())
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <button type="button" class="btn w-100" data-bs-toggle="modal"
+                                    data-bs-target="#placesGroupsModal">
+                                <div class="card text-center w-100">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    Lieux à proximité
+                                </div>
+                            </button>
                         </div>
-                    </button>
-                </div>
-                @include('inc.modules_modals.module_places_groups')
-            @endif
-            @if($livret->homeInfos)
-                @include('inc.modules_modals.module_home_infos')
-            @endif
+                        @include('inc.modules_modals.module_places_groups')
+                    @endif
+                @endif
+            @endforeach
         </div>
     </div>
 </main>

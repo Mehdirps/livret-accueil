@@ -24,6 +24,25 @@ Route::get('/cgu', function () {
 
 Route::get('/livret/{slug}/{id}', [App\Http\Controllers\LivretController::class, 'show'])->name('livret.show');
 
+// Fait une route de test pour mon api en POST et return les données recu
+Route::post('/test', function () {
+
+    // Fait un validator pour la request
+    $validator = Validator::make(request()->all(), [
+        'name' => 'required|string',
+        'email' => 'required|email',
+        'phone' => 'required|numeric',
+        'message' => 'required|string',
+    ]);
+
+    // Si le validator echoue, return les erreurs
+
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+    }
+
+    return response()->json(request()->all(), 200);
+});
 /* Suggestions */
 Route::post('/suggestions', [App\Http\Controllers\SuggestionController::class, 'store'])->name('suggestion.store');
 

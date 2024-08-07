@@ -36,15 +36,29 @@ class LivretController extends Controller
     {
         $livret = Livret::where('id', $id)->where('slug', $slug)->first();
 
-        LivretView::create([
-            'livret_id' => $livret->id,
-            'viewed_at' => now(),
-        ]);
 
         if ($livret) {
+            LivretView::create([
+                'livret_id' => $livret->id,
+                'viewed_at' => now(),
+            ]);
             return view('livret', compact('livret'));
         } else {
             return redirect()->route('dashboard.index')->with('error', 'Ce livret n\'existe pas.');
         }
+
+
+        /*
+        // API
+        */
+        /*if($livret) {
+            LivretView::create([
+                'livret_id' => $livret->id,
+                'viewed_at' => now(),
+            ]);
+            return response()->json($livret, 200);
+        } else {
+            return response()->json(['message' => 'Ce livret n\'existe pas.'], 404);
+        }*/
     }
 }

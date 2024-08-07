@@ -900,6 +900,8 @@ class DashboardController extends Controller
             $pdf = PDF::loadView('dashboard.partials.suggestions_pdf', ['data' => $data]);
         }elseif($type == 'inventories'){
             $pdf = PDF::loadView('dashboard.partials.inventories_pdf', ['data' => $data]);
+        }elseif($type == 'stats'){
+            $pdf = PDF::loadView('dashboard.partials.stats_pdf', ['data' => $data]);
         }
 
         $output = $pdf->output();

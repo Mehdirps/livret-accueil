@@ -15,7 +15,6 @@ class Suggest extends Model
         'title',
         'message',
     ];
-
     public function livret()
     {
         return $this->belongsTo(Livret::class);

@@ -5,7 +5,10 @@
 @section('dashboard_content')
     <div class="container">
         <h2 class="mb-4">Statistiques des vues de livret</h2>
-
+        <hr>
+        <p>Exporter en PDF les statistiques de vues de votre livret</p>
+        <button id="exportPdf" class="btn btn-primary">Exporter en PDF</button>
+        <hr>
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="card text-white bg-primary mb-3">
@@ -68,4 +71,37 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer_script')
+    <script>
+        $('#exportPdf').on('click', function() {
+            var data = {
+                totalViews: $('.card-title:eq(0)').text(),
+                viewsToday: $('.card-title:eq(1)').text(),
+                viewsThisWeek: $('.card-title:eq(2)').text(),
+                viewsThisMonth: $('.card-title:eq(3)').text(),
+                viewsBetweenDates: $('.card-text').text(),
+                startDate: $('.card-title:eq(4)').text(),
+                endDate: $('.card-title:eq(5)').text()
+            };
+
+            $.ajax({
+                url: '/dashboard/datas/export',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    data: data,
+                    type : 'stats'
+                }
+            }).done(function(response) {
+                if (response.status === 'success') {
+                    var link = document.createElement('a');
+                    link.href = 'data:application/pdf;base64,' + response.pdf_base64;
+                    link.download = 'stats.pdf';
+                    link.click();
+                }
+            });
+        });
+    </script>
 @endsection
